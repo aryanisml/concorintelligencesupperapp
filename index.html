@@ -628,12 +628,16 @@ button{font-family:var(--font)}
   <div class="nav-right">
     <div class="nav-status">
       <span class="nav-status-dot"></span>
-      <span class="nav-status-text">Live</span>
+      <span class="nav-status-text" data-lang="live">Live</span>
     </div>
     <div class="nav-div"></div>
     <span class="nav-date" id="nav-date">13-Mar-2026</span>
     <div class="nav-div"></div>
-    <button onclick="goHome()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(255,255,255,.08);border:1px solid rgba(148,163,184,.3);border-radius:9px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);cursor:pointer;font-family:var(--font);transition:.2s" onmouseover="this.style.background='rgba(255,255,255,.12)';this.style.borderColor='rgba(148,163,184,.5)'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(148,163,184,.3)'">⊞ Home</button>
+    <div style="position:relative;z-index:105" id="lang-selector">
+      <button id="lang-toggle" onclick="toggleLanguageDropdown()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(255,255,255,.08);border:1px solid rgba(148,163,184,.3);border-radius:9px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);cursor:pointer;font-family:var(--font);transition:.2s;position:relative;z-index:105" onmouseover="this.style.background='rgba(255,255,255,.12)';this.style.borderColor='rgba(148,163,184,.5)'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(148,163,184,.3)'">🌐 <span id="lang-label">English</span></button>
+    </div>
+    <div class="nav-div"></div>
+    <button onclick="goHome()" style="display:flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(255,255,255,.08);border:1px solid rgba(148,163,184,.3);border-radius:9px;font-size:12px;font-weight:600;color:rgba(255,255,255,.8);cursor:pointer;font-family:var(--font);transition:.2s;position:relative;z-index:104" onmouseover="this.style.background='rgba(255,255,255,.12)';this.style.borderColor='rgba(148,163,184,.5)'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(148,163,184,.3)'">⊞ Home</button>
     <div class="nav-div"></div>
     <div class="nav-user">
       <div id="nav-av" class="nav-av"></div>
@@ -644,6 +648,12 @@ button{font-family:var(--font)}
     </div>
     <button onclick="doLogout()" class="nav-logout">Logout</button>
   </div>
+</div>
+
+<!-- Language Dropdown Menu -->
+<div id="lang-dropdown" style="display:none;position:fixed;top:70px;right:0;background:#fff;border:1px solid #E2E8F0;border-radius:10px;box-shadow:0 12px 32px rgba(0,0,0,.2);z-index:9999;min-width:160px;overflow:visible">
+  <button onclick="switchLanguage('en')" style="width:100%;padding:12px 14px;border:none;background:rgba(27,79,216,.05);color:#0D1B2A;text-align:left;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:.15s;border-bottom:1px solid #E2E8F0" onmouseover="this.style.background='rgba(27,79,216,.1)'" onmouseout="this.style.background='rgba(27,79,216,.05)'">🇬🇧 English</button>
+  <button onclick="switchLanguage('hi')" style="width:100%;padding:12px 14px;border:none;background:#fff;color:#0D1B2A;text-align:left;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:.15s" onmouseover="this.style.background='rgba(27,79,216,.05)'" onmouseout="this.style.background='#fff'">🇮🇳 हिंदी</button>
 </div>
 
 <div class="content">
@@ -670,12 +680,12 @@ button{font-family:var(--font)}
   <div class="ph">
     <div class="ph-header">
       <div class="ph-icon" style="background:var(--ops-bg)">🏭</div>
-      <div><div class="ph-title">Operations Hub</div><div class="ph-sub" id="pgsub-ops" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('ops')">Terminal operations, train tracking, cargo management <span style="font-size:10px;opacity:.4">✏️</span></div></div>
-      <button class="back-btn" onclick="goHome()" style="margin-left:auto">← Home</button>
+      <div><div class="ph-title" data-lang="operations-hub">Operations Hub</div><div class="ph-sub" id="pgsub-ops" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('ops')" data-lang="terminal-operations">Terminal operations, train tracking, cargo management <span style="font-size:10px;opacity:.4">✏️</span></div></div>
+      <button class="back-btn" onclick="goHome()" style="margin-left:auto" data-lang="back">← Home</button>
     </div>
     <!-- Existing Systems -->
     <div class="card">
-      <div class="card-header"><span style="font-size:16px">🔗</span><div><div class="card-title">Existing Systems</div><div class="card-sub">Live CONCOR operational platforms — hover for name</div></div></div>
+      <div class="card-header"><span style="font-size:16px">🔗</span><div><div class="card-title" data-lang="existing-systems">Existing Systems</div><div class="card-sub" data-lang="live-platforms">Live CONCOR operational platforms — hover for name</div></div></div>
       <div class="card-body">
         <div class="sys-grid">
           <button class="sys-btn" data-tip="ETMS / DTMS / CCLS — Terminal & Cargo Logistics" onclick="showToast('Opening ETMS / DTMS / CCLS','#059669')">
@@ -733,8 +743,8 @@ button{font-family:var(--font)}
   <div class="ph">
     <div class="ph-header">
       <div class="ph-icon" style="background:var(--hr-bg)">👥</div>
-      <div><div class="ph-title">HR & Workforce</div><div class="ph-sub" id="pgsub-hr" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('hr')">People management, onboarding, learning & development <span style="font-size:10px;opacity:.4">✏️</span></div></div>
-      <button class="back-btn" onclick="goHome()" style="margin-left:auto">← Home</button>
+      <div><div class="ph-title" data-lang="hr-workforce">HR & Workforce</div><div class="ph-sub" id="pgsub-hr" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('hr')" data-lang="employee-lifecycle">People management, onboarding, learning & development <span style="font-size:10px;opacity:.4">✏️</span></div></div>
+      <button class="back-btn" onclick="goHome()" style="margin-left:auto" data-lang="back">← Home</button>
     </div>
     <!-- Existing Systems -->
     <div class="card">
@@ -940,8 +950,8 @@ button{font-family:var(--font)}
   <div class="ph">
     <div class="ph-header">
       <div class="ph-icon" style="background:var(--cust-bg)">📦</div>
-      <div><div class="ph-title">Customer Portal</div><div class="ph-sub" id="pgsub-cust" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('cust')">Freight, tracking, booking and risk advisory services <span style="font-size:10px;opacity:.4">✏️</span></div></div>
-      <button class="back-btn" onclick="goHome()" style="margin-left:auto">← Home</button>
+      <div><div class="ph-title" data-lang="customer-portal">Customer Portal</div><div class="ph-sub" id="pgsub-cust" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('cust')" data-lang="freight-tracking">Freight, tracking, booking and risk advisory services <span style="font-size:10px;opacity:.4">✏️</span></div></div>
+      <button class="back-btn" onclick="goHome()" style="margin-left:auto" data-lang="back">← Home</button>
     </div>
     <!-- Existing Systems -->
     <div class="card">
@@ -969,7 +979,7 @@ button{font-family:var(--font)}
     </div><!-- /Existing Systems card -->
     <!-- Features -->
     <div class="card">
-      <div class="card-header"><span style="font-size:16px">⚡</span><div><div class="card-title">Features</div><div class="card-sub">Customer intelligence tools built on CONCOR data</div></div></div>
+      <div class="card-header"><span style="font-size:16px">⚡</span><div><div class="card-title" data-lang="features">Features</div><div class="card-sub" data-lang="customer-intelligence">Customer intelligence tools built on CONCOR data</div></div></div>
       <div class="card-body">
         <div class="feature-grid">
           <div class="feat-btn build" style="background:linear-gradient(135deg,#F0FDFA,#CCFBF1);border-color:var(--cust)" onclick="navTo('cust-freight')">
@@ -1770,8 +1780,8 @@ button{font-family:var(--font)}
   <div class="ph">
     <div class="ph-header">
       <div class="ph-icon" style="background:var(--sus-bg)">🌿</div>
-      <div><div class="ph-title">Sustainability</div><div class="ph-sub" id="pgsub-sus" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('sus')">ESG tracking · carbon emissions · green logistics initiatives <span style="font-size:10px;opacity:.4">✏️</span></div></div>
-      <button class="back-btn" onclick="goHome()" style="margin-left:auto">← Home</button>
+      <div><div class="ph-title" data-lang="sustainability">Sustainability</div><div class="ph-sub" id="pgsub-sus" style="cursor:pointer" title="Click to edit subtitle" onclick="editPageSub('sus')" data-lang="esg-metrics">ESG tracking · carbon emissions · green logistics initiatives <span style="font-size:10px;opacity:.4">✏️</span></div></div>
+      <button class="back-btn" onclick="goHome()" style="margin-left:auto" data-lang="back">← Home</button>
     </div>
 
     <!-- Existing Systems -->
@@ -2414,10 +2424,10 @@ button{font-family:var(--font)}
   <div class="ph">
     <div class="ph-header">
       <div class="ph-icon" style="background:var(--fin-bg)">💰</div>
-      <div><div class="ph-title">Finance Analytics</div></div>
+      <div><div class="ph-title" data-lang="finance-analytics">Finance Analytics</div></div>
       <div style="margin-left:auto;display:flex;gap:8px">
-        <button class="back-btn" onclick="navTo('analytics')">← Analytics</button>
-        <button class="back-btn" onclick="goHome()">⊞ Home</button>
+        <button class="back-btn" onclick="navTo('analytics')" data-lang="back">← Analytics</button>
+        <button class="back-btn" onclick="goHome()" data-lang="home">⊞ Home</button>
       </div>
     </div>
     <div id="fin-dash-inner"></div>
@@ -3256,6 +3266,613 @@ button{font-family:var(--font)}
 </div><!-- /pg-dash-sustain -->
 
 <script>
+// ═══════════════════════════════════════════════════════════════
+// LANGUAGE TRANSLATIONS
+// ═══════════════════════════════════════════════════════════════
+const LANG = {
+  en: {
+    // Navigation & Common
+    'home': 'Home',
+    'logout': 'Logout',
+    'language': 'Language',
+    'english': 'English',
+    'hindi': 'हिंदी',
+    
+    // Landing Page
+    'command-center': 'Command Center',
+    'unified-platform': 'Unified intelligence platform for CONCOR — terminals, people, customers & sustainability.',
+    
+    // Operations
+    'operations-hub': 'Operations Hub',
+    'terminal-operations': 'Terminal operations, train tracking, cargo management',
+    'existing-systems': 'Existing Systems',
+    'live-platforms': 'Live CONCOR operational platforms — hover for name',
+    'features': 'Features',
+    'customer-intelligence': 'Customer intelligence tools built on CONCOR data',
+    
+    // HR
+    'hr-workforce': 'HR & Workforce',
+    'employee-lifecycle': 'Employee lifecycle, onboarding, training & safety',
+    'active-onboardings': 'Active Onboardings',
+    'completed': 'Completed',
+    'all-records': 'All Records',
+    
+    // Customer
+    'customer-portal': 'Customer Portal',
+    'freight-tracking': 'Freight, tracking, booking and risk advisory services',
+    'freight-rate-calculator': 'Freight Rate Calculator',
+    'terminal-finder': 'Terminal Finder',
+    'train-container-search': 'Train & Container Search',
+    'shipment-alerts': 'Shipment Alerts',
+    
+    // Finance
+    'finance-analytics': 'Finance Analytics',
+    'revenue-profit': 'Revenue, profit, expenditure analysis & forecasting',
+    'revenue': 'Revenue',
+    'expenses': 'Expenses',
+    'profit': 'Profit',
+    'forecast': 'Forecast',
+    
+    // Sustainability
+    'sustainability': 'Sustainability',
+    'esg-metrics': 'ESG metrics, carbon footprint, emissions tracking',
+    'carbon-footprint': 'Carbon Footprint',
+    'emissions': 'Emissions',
+    'environmental': 'Environmental',
+    
+    // Common Terms
+    'search': 'Search',
+    'filter': 'Filter',
+    'status': 'Status',
+    'date': 'Date',
+    'action': 'Action',
+    'view': 'View',
+    'edit': 'Edit',
+    'delete': 'Delete',
+    'save': 'Save',
+    'cancel': 'Cancel',
+    'close': 'Close',
+    'next': 'Next',
+    'back': 'Back',
+    'alert': 'Alert',
+    'warning': 'Warning',
+    'success': 'Success',
+    'error': 'Error',
+    'build': 'BUILDING',
+    'live': 'LIVE',
+    'soon': 'COMING SOON',
+    'submit': 'Submit',
+    'download': 'Download',
+    'upload': 'Upload',
+    'export': 'Export',
+    'import': 'Import',
+    'refresh': 'Refresh',
+    'search-input': 'Search terminals, containers, trains…',
+    'last-sync': 'Last Sync',
+    'system-live': 'System Live',
+    'help-support': 'Help & Support',
+    'documentation': 'Documentation',
+    'feedback': 'Feedback',
+    'onboarding': 'Onboarding',
+    'transfer-mobility': 'Transfer & Mobility',
+    'training-compliance': 'Training & Compliance',
+    'fy-2025-26': 'FY 2025-26',
+    'this-quarter': 'This quarter',
+    'view-all-records': 'View All Records',
+    'onboarding-records': 'Onboarding Records',
+    'search-by-name': 'Search by name or terminal…',
+    'employee': 'Employee',
+    'grade': 'Grade',
+    'terminal': 'Terminal',
+    'date-of-joining': 'Date of Joining',
+    'documents': 'Documents',
+    'it-access': 'IT Access',
+    'safety-induction': 'Safety Induction',
+    'instant-quotes': 'Instant indicative rail freight quotes by route, weight and commodity',
+    'best-terminal': 'Find the best CONCOR terminal for your shipment',
+    'live-map-rendering': 'Search trains and containers with live map rendering',
+    'auto-notify': 'Auto-notify on delay, demurrage threshold, gate-in/out events',
+    'risk-advisory': 'Risk Advisory',
+    'freight-risk': 'Freight risk taxonomy, scoring model & risk mitigation',
+    'quarterly': 'Quarterly',
+    'annual': 'Annual',
+    'revenue-trend': 'Revenue Trend',
+    'expense-breakdown': 'Expense Breakdown',
+    'profit-margin': 'Profit Margin',
+    'budget-vs-actual': 'Budget vs Actual',
+    'co2-reduction': 'CO2 Reduction Target',
+    'waste-management': 'Waste Management',
+    'energy-efficiency': 'Energy Efficiency',
+    'social': 'Social',
+    'governance': 'Governance',
+    'confirmation': 'Confirmation',
+    'are-you-sure': 'Are you sure?',
+    'record-saved': 'Record saved successfully',
+    'record-updated': 'Record updated successfully',
+    'record-deleted': 'Record deleted successfully',
+    'operation-failed': 'Operation failed. Please try again.',
+    'name': 'Name',
+    'email': 'Email',
+    'phone': 'Phone',
+    'address': 'Address',
+    'city': 'City',
+    'state': 'State',
+    'postal-code': 'Postal Code',
+    'country': 'Country',
+    'time': 'Time',
+    'remarks': 'Remarks',
+    'notes': 'Notes',
+    'required-field': 'This field is required',
+    'invalid-email': 'Please enter a valid email',
+    'password': 'Password',
+    'confirm-password': 'Confirm Password',
+    'username': 'Username',
+    'role': 'Role',
+    'overview': 'Overview',
+    'details': 'Details',
+    'history': 'History',
+    'settings': 'Settings',
+    'performance': 'Performance',
+    'analytics': 'Analytics',
+    'reports': 'Reports',
+    'dashboard': 'Dashboard',
+    'today': 'Today',
+    'yesterday': 'Yesterday',
+    'this-week': 'This Week',
+    'last-week': 'Last Week',
+    'this-month': 'This Month',
+    'last-month': 'Last Month',
+    'this-year': 'This Year',
+    'last-year': 'Last Year',
+    'january': 'January',
+    'february': 'February',
+    'march': 'March',
+    'april': 'April',
+    'may': 'May',
+    'june': 'June',
+    'july': 'July',
+    'august': 'August',
+    'september': 'September',
+    'october': 'October',
+    'november': 'November',
+    'december': 'December',
+    'total': 'Total',
+    'count': 'Count',
+    'percentage': 'Percentage',
+    'average': 'Average',
+    'minimum': 'Minimum',
+    'maximum': 'Maximum',
+    'growth': 'Growth',
+    'decline': 'Decline',
+    'no-data': 'No data available',
+    'train-name': 'Train Name',
+    'container-id': 'Container ID',
+    'origin': 'Origin',
+    'destination': 'Destination',
+    'departure': 'Departure',
+    'arrival': 'Arrival',
+    'eta': 'ETA',
+    'status-active': 'Active',
+    'status-delayed': 'Delayed',
+    'status-completed': 'Completed',
+    'status-pending': 'Pending',
+    'capacity': 'Capacity',
+    'utilization': 'Utilization',
+    'empty': 'Empty',
+    'full': 'Full',
+    'train-tracker': 'Train Tracker',
+    'delay-alerts': 'Delay Alerts',
+    'equipment-monitor': 'Equipment Monitor',
+    'ccls-filing': 'CCLS e-Filing — Shipping bill, bill of lading, documentation',
+    'e-booking': 'e-Booking — Container & slot booking (ICD Tughlakabad)',
+    'e-fwd-note': 'e-Forwarding Note — Digital forwarding note & documentation',
+    'container-tracking': 'Container Tracking (Track & Trace)',
+    'sort': 'Sort'
+  },
+  hi: {
+    // Navigation & Common
+    'home': 'होम',
+    'logout': 'लॉग आउट करें',
+    'language': 'भाषा',
+    'english': 'English',
+    'hindi': 'हिंदी',
+    
+    // Landing Page
+    'command-center': 'कमांड सेंटर',
+    'unified-platform': 'CONCOR के लिए एकीकृत बुद्धिमत्ता प्लेटफॉर्म — टर्मिनल, कर्मचारी, ग्राहक और स्थिरता।',
+    
+    // Operations
+    'operations-hub': 'संचालन हब',
+    'terminal-operations': 'टर्मिनल संचालन, ट्रेन ट्रैकिंग, कार्गो प्रबंधन',
+    'existing-systems': 'मौजूदा सिस्टम',
+    'live-platforms': 'लाइव CONCOR ऑपरेशनल प्लेटफॉर्म — नाम के लिए होवर करें',
+    'features': 'विशेषताएं',
+    'customer-intelligence': 'CONCOR डेटा पर आधारित ग्राहक बुद्धিमत्ता उपकरण',
+    
+    // HR
+    'hr-workforce': 'मानव संसाधन और कर्मबल',
+    'employee-lifecycle': 'कर्मचारी जीवन चक्र, ऑनबोर्डिंग, प्रशिक्षण और सुरक्षा',
+    'active-onboardings': 'सक्रिय ऑनबोर्डिंग',
+    'completed': 'पूर्ण',
+    'all-records': 'सभी रिकॉर्ड',
+    
+    // Customer
+    'customer-portal': 'ग्राहक पोर्टल',
+    'freight-tracking': 'माल ढुलाई, ट्रैकिंग, बुकिंग और जोखिम सलाह सेवाएं',
+    'freight-rate-calculator': 'माल भाड़ा कैलकुलेटर',
+    'terminal-finder': 'टर्मिनल खोजक',
+    'train-container-search': 'ट्रेन और कंटेनर खोज',
+    'shipment-alerts': 'शिपमेंट सतर्कताएं',
+    
+    // Finance
+    'finance-analytics': 'वित्तीय विश्लेषण',
+    'revenue-profit': 'राजस्व, लाभ, व्यय विश्लेषण और पूर्वानुमान',
+    'revenue': 'राजस्व',
+    'expenses': 'व्यय',
+    'profit': 'लाभ',
+    'forecast': 'पूर्वानुमान',
+    
+    // Sustainability
+    'sustainability': 'स्थिरता',
+    'esg-metrics': 'ईएसजी मेट्रिक्स, कार्बन पदचिन्ह, उत्सर्जन ट्रैकिंग',
+    'carbon-footprint': 'कार्बन पदचिन्ह',
+    'emissions': 'उत्सर्जन',
+    'environmental': 'पर्यावरणीय',
+    
+    // Common Terms
+    'search': 'खोजें',
+    'filter': 'फ़िल्टर करें',
+    'status': 'स्थिति',
+    'date': 'तारीख',
+    'action': 'कार्रवाई',
+    'view': 'देखें',
+    'edit': 'संपादित करें',
+    'delete': 'हटाएं',
+    'save': 'सहेजें',
+    'cancel': 'रद्द करें',
+    'close': 'बंद करें',
+    'next': 'अगला',
+    'back': 'पीछे',
+    'alert': 'सतर्कता',
+    'warning': 'चेतावनी',
+    'success': 'सफल',
+    'error': 'त्रुटि',
+    'build': 'निर्माणाधीन',
+    'live': 'लाइव',
+    'soon': 'जल्द ही आ रहा है',
+    'submit': 'जमा करें',
+    'download': 'डाउनलोड करें',
+    'upload': 'अपलोड करें',
+    'export': 'निर्यात करें',
+    'import': 'आयात करें',
+    'refresh': 'ताज़ा करें',
+    'onboarding': 'ऑनबोर्डिंग',
+    'transfer-mobility': 'स्थानांतरण और गतिशीलता',
+    'training-compliance': 'प्रशिक्षण और अनुपालन',
+    'fy-2025-26': 'वित्तीय वर्ष 2025-26',
+    'this-quarter': 'इस तिमाही',
+    'view-all-records': 'सभी रिकॉर्ड देखें',
+    'onboarding-records': 'ऑनबोर्डिंग रिकॉर्ड',
+    'search-by-name': 'नाम या टर्मिनल से खोजें…',
+    'employee': 'कर्मचारी',
+    'grade': 'ग्रेड',
+    'terminal': 'टर्मिनल',
+    'date-of-joining': 'शामिल होने की तारीख',
+    'documents': 'दस्तावेज़',
+    'it-access': 'IT प्रवेश',
+    'safety-induction': 'सुरक्षा प्रेरण',
+    'instant-quotes': 'मार्ग, वजन और वस्तु के आधार पर तत्काल संकेतामूलक रेल माल भाड़ा उद्धरण',
+    'best-terminal': 'अपने शिपमेंट के लिए सर्वश्रेष्ठ CONCOR टर्मिनल खोजें',
+    'live-map-rendering': 'चयनित ट्रेन और अनुमानित ETA की लाइव मानचित्र रेंडरिंग',
+    'auto-notify': 'देरी, demurrage सीमा, गेट-इन/आउट इवेंट पर सूचना',
+    'risk-advisory': 'जोखिम सलाह',
+    'freight-risk': 'माल जोखिम वर्गीकरण और स्कोरिंग मॉडल',
+    'quarterly': 'त्रैमासिक',
+    'annual': 'वार्षिक',
+    'revenue-trend': 'राजस्व प्रवृत्ति',
+    'expense-breakdown': 'व्यय विभाजन',
+    'profit-margin': 'लाभ मार्जिन',
+    'budget-vs-actual': 'बजट बनाम वास्तविक',
+    'co2-reduction': 'CO2 कमी लक्ष्य',
+    'waste-management': 'अपशिष्ट प्रबंधन',
+    'energy-efficiency': 'ऊर्जा दक्षता',
+    'social': 'सामाजिक',
+    'governance': 'शासन',
+    'confirmation': 'पुष्टि',
+    'are-you-sure': 'क्या आप निश्चित हैं?',
+    'record-saved': 'रिकॉर्ड सफलतापूर्वक सहेजा गया',
+    'record-updated': 'रिकॉर्ड सफलतापूर्वक अपडेट किया गया',
+    'record-deleted': 'रिकॉर्ड सफलतापूर्वक हटाया गया',
+    'operation-failed': 'ऑपरेशन विफल रहा। कृपया पुनः प्रयास करें।',
+    'name': 'नाम',
+    'email': 'ईमेल',
+    'phone': 'फोन',
+    'address': 'पता',
+    'city': 'शहर',
+    'state': 'राज्य',
+    'postal-code': 'पिन कोड',
+    'country': 'देश',
+    'date': 'तारीख',
+    'time': 'समय',
+    'remarks': 'टिप्पणियाँ',
+    'notes': 'नोट्स',
+    'required-field': 'यह फील्ड अनिवार्य है',
+    'invalid-email': 'कृपया वैध ईमेल दर्ज करें',
+    'password': 'पासवर्ड',
+    'confirm-password': 'पासवर्ड की पुष्टि करें',
+    'username': 'उपयोगकर्ता का नाम',
+    'role': 'भूमिका',
+    'overview': 'अवलोकन',
+    'details': 'विवरण',
+    'history': 'इतिहास',
+    'settings': 'सेटिंग्स',
+    'performance': 'प्रदर्शन',
+    'analytics': 'विश्लेषण',
+    'reports': 'रिपोर्ट',
+    'dashboard': 'डैशबोर्ड',
+    'today': 'आज',
+    'yesterday': 'कल',
+    'this-week': 'इस हफ्ते',
+    'last-week': 'पिछले हफ्ते',
+    'this-month': 'इस महीने',
+    'last-month': 'पिछले महीने',
+    'this-year': 'इस साल',
+    'last-year': 'पिछले साल',
+    'january': 'जनवरी',
+    'february': 'फरवरी',
+    'march': 'मार्च',
+    'april': 'अप्रैल',
+    'may': 'मई',
+    'june': 'जून',
+    'july': 'जुलाई',
+    'august': 'अगस्त',
+    'september': 'सितंबर',
+    'october': 'अक्टूबर',
+    'november': 'नवंबर',
+    'december': 'दिसंबर',
+    'total': 'कुल',
+    'count': 'गिनती',
+    'percentage': 'प्रतिशत',
+    'average': 'औसत',
+    'minimum': 'न्यूनतम',
+    'maximum': 'अधिकतम',
+    'growth': 'वृद्धि',
+    'decline': 'गिरावट',
+    'no-data': 'कोई डेटा उपलब्ध नहीं है',
+    'train-name': 'ट्रेन का नाम',
+    'container-id': 'कंटेनर ID',
+    'origin': 'उत्पत्ति',
+    'destination': 'गंतव्य',
+    'departure': 'प्रस्थान',
+    'arrival': 'आगमन',
+    'eta': 'अनुमानित आगमन समय',
+    'status-active': 'सक्रिय',
+    'status-delayed': 'विलंबित',
+    'status-completed': 'पूर्ण',
+    'status-pending': 'लंबित',
+    'capacity': 'क्षमता',
+    'utilization': 'उपयोग',
+    'empty': 'खाली',
+    'full': 'पूर्ण',
+    'train-tracker': 'ट्रेन ट्रैकर',
+    'delay-alerts': 'देरी सतर्कताएं',
+    'equipment-monitor': 'उपकरण निगरानी',
+    'ccls-filing': 'CCLS ई-फाइलिंग — शिपिंग बिल, बिल ऑफ लेडिंग, दस्तावेज़',
+    'e-booking': 'ई-बुकिंग — कंटेनर और स्लॉट बुकिंग (ICD तुगलकाबाद)',
+    'e-fwd-note': 'ई-फॉरवर्डिंग नोट — डिजिटल फॉरवर्डिंग नोट और दस्तावेज़',
+    'container-tracking': 'कंटेनर ट्रैकिंग (ट्रैक और ट्रेस)',
+    'sort': 'सॉर्ट करें',
+    'help-support': 'सहायता और समर्थन',
+    'documentation': 'दस्तावेज़',
+    'feedback': 'प्रतिक्रिया',
+    'last-sync': 'अंतिम सिंक',
+    'system-live': 'सिस्टम लाइव है',
+    'info': 'जानकारी'
+  }
+};
+
+let currentLanguage = 'en';
+
+function toggleLanguageDropdown() {
+  const dropdown = document.getElementById('lang-dropdown');
+  dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+}
+
+function toggleLanguageDropdown() {
+  const dropdown = document.getElementById('lang-dropdown');
+  const toggle = document.getElementById('lang-toggle');
+  
+  if (dropdown.style.display === 'none' || dropdown.style.display === '') {
+    // Get button position
+    const rect = toggle.getBoundingClientRect();
+    dropdown.style.display = 'block';
+    dropdown.style.right = (window.innerWidth - rect.right) + 'px';
+    dropdown.style.top = (rect.bottom + 8) + 'px';
+  } else {
+    dropdown.style.display = 'none';
+  }
+}
+
+function switchLanguage(lang) {
+  currentLanguage = lang;
+  const dropdown = document.getElementById('lang-dropdown');
+  dropdown.style.display = 'none';
+  document.getElementById('lang-label').textContent = lang === 'en' ? 'English' : 'हिंदी';
+  
+  // Save language preference
+  localStorage.setItem('concor-lang', lang);
+  
+  // Update all translatable elements
+  updatePageLanguage();
+  
+  showToast('Language changed to ' + (lang === 'en' ? 'English' : 'हिंदी'), '#1B4FD8');
+}
+
+function getTranslation(key) {
+  return LANG[currentLanguage][key] || LANG['en'][key] || key;
+}
+
+function updatePageLanguage() {
+  // Landing Page
+  const landGreeting = document.getElementById('land-greeting');
+  if (landGreeting) landGreeting.textContent = getTranslation('command-center');
+  
+  const landSub = document.getElementById('land-sub');
+  if (landSub) landSub.textContent = getTranslation('unified-platform');
+  
+  // Logout button
+  const logoutBtn = document.querySelector('.nav-logout');
+  if (logoutBtn) logoutBtn.textContent = getTranslation('logout');
+  
+  // Page titles
+  const opTitle = document.querySelector('#pg-ops .ph-title');
+  if (opTitle) opTitle.textContent = getTranslation('operations-hub');
+  
+  const hrTitle = document.querySelector('#pg-hr .ph-title');
+  if (hrTitle) hrTitle.textContent = getTranslation('hr-workforce');
+  
+  const custTitle = document.querySelector('#pg-cust .ph-title');
+  if (custTitle) custTitle.textContent = getTranslation('customer-portal');
+  
+  const finTitle = document.querySelector('#pg-fin .ph-title');
+  if (finTitle) finTitle.textContent = getTranslation('finance-analytics');
+  
+  const susTitle = document.querySelector('#pg-sus .ph-title');
+  if (susTitle) susTitle.textContent = getTranslation('sustainability');
+  
+  // Page subtitles
+  if (document.getElementById('pgsub-ops')) {
+    document.getElementById('pgsub-ops').textContent = getTranslation('terminal-operations');
+  }
+  if (document.getElementById('pgsub-hr')) {
+    document.getElementById('pgsub-hr').textContent = getTranslation('employee-lifecycle');
+  }
+  if (document.getElementById('pgsub-cust')) {
+    document.getElementById('pgsub-cust').textContent = getTranslation('freight-tracking');
+  }
+  if (document.getElementById('pgsub-fin')) {
+    document.getElementById('pgsub-fin').textContent = getTranslation('revenue-profit');
+  }
+  if (document.getElementById('pgsub-sus')) {
+    document.getElementById('pgsub-sus').textContent = getTranslation('esg-metrics');
+  }
+  
+  // Update all elements with data-lang attribute
+  document.querySelectorAll('[data-lang]').forEach(el => {
+    const key = el.getAttribute('data-lang');
+    el.textContent = getTranslation(key);
+  });
+  
+  // Update all elements with data-lang-title attribute
+  document.querySelectorAll('[data-lang-title]').forEach(el => {
+    const key = el.getAttribute('data-lang-title');
+    el.title = getTranslation(key);
+  });
+  
+  // Update all elements with data-lang-placeholder attribute
+  document.querySelectorAll('[data-lang-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-lang-placeholder');
+    el.placeholder = getTranslation(key);
+  });
+  
+  // Update search input placeholder
+  const gsInput = document.getElementById('gs-input');
+  if (gsInput) {
+    gsInput.placeholder = getTranslation('search-input');
+  }
+  
+  // Update card headers
+  document.querySelectorAll('.card-header .card-title').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  // Update card subtitles
+  document.querySelectorAll('.card-sub').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  // Update stat labels
+  document.querySelectorAll('.stat-lbl').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  // Update feature buttons
+  document.querySelectorAll('.feat-name').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  document.querySelectorAll('.feat-desc').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  // Update table headers
+  document.querySelectorAll('th').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  // Update form labels
+  document.querySelectorAll('.form-label').forEach(el => {
+    if (el.hasAttribute('data-lang')) {
+      const key = el.getAttribute('data-lang');
+      el.textContent = getTranslation(key);
+    }
+  });
+  
+  // Update buttons with data-lang attribute
+  document.querySelectorAll('button[data-lang]').forEach(el => {
+    const key = el.getAttribute('data-lang');
+    el.textContent = getTranslation(key);
+  });
+  
+  // Update links with data-lang attribute
+  document.querySelectorAll('a[data-lang]').forEach(el => {
+    const key = el.getAttribute('data-lang');
+    el.textContent = getTranslation(key);
+  });
+}
+
+// Load saved language preference on page load
+document.addEventListener('DOMContentLoaded', function() {
+  const savedLang = localStorage.getItem('concor-lang') || 'en';
+  currentLanguage = savedLang;
+  const langLabel = document.getElementById('lang-label');
+  if (langLabel) {
+    langLabel.textContent = savedLang === 'en' ? 'English' : 'हिंदी';
+  }
+  if (savedLang !== 'en') {
+    updatePageLanguage();
+  }
+});
+
+// Close language dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  const dropdown = document.getElementById('lang-dropdown');
+  const toggleBtn = document.getElementById('lang-toggle');
+  const langSelector = document.getElementById('lang-selector');
+  
+  if (!dropdown.contains(e.target) && !toggleBtn.contains(e.target) && !langSelector.contains(e.target)) {
+    dropdown.style.display = 'none';
+  }
+});
+
 // ═══════════════════════════════════════════════════════════════
 // DATA
 // ═══════════════════════════════════════════════════════════════
@@ -8152,21 +8769,21 @@ function searchContainer(){
       </div>
       <span style="width:1px;height:24px;background:rgba(148,163,184,.15)"></span>
       <div style="display:flex;gap:16px">
-        <a href="#" onclick="return false" style="color:#94A3B8;text-decoration:none;font-size:11.5px;transition:.2s;border-bottom:1px solid transparent" onmouseover="this.style.color='#CBD5E1'" onmouseout="this.style.color='#94A3B8'">Help & Support</a>
-        <a href="#" onclick="return false" style="color:#94A3B8;text-decoration:none;font-size:11.5px;transition:.2s;border-bottom:1px solid transparent" onmouseover="this.style.color='#CBD5E1'" onmouseout="this.style.color='#94A3B8'">Documentation</a>
-        <a href="#" onclick="return false" style="color:#94A3B8;text-decoration:none;font-size:11.5px;transition:.2s;border-bottom:1px solid transparent" onmouseover="this.style.color='#CBD5E1'" onmouseout="this.style.color='#94A3B8'">Feedback</a>
+        <a href="#" onclick="return false" style="color:#94A3B8;text-decoration:none;font-size:11.5px;transition:.2s;border-bottom:1px solid transparent" data-lang="help-support" onmouseover="this.style.color='#CBD5E1'" onmouseout="this.style.color='#94A3B8'">Help & Support</a>
+        <a href="#" onclick="return false" style="color:#94A3B8;text-decoration:none;font-size:11.5px;transition:.2s;border-bottom:1px solid transparent" data-lang="documentation" onmouseover="this.style.color='#CBD5E1'" onmouseout="this.style.color='#94A3B8'">Documentation</a>
+        <a href="#" onclick="return false" style="color:#94A3B8;text-decoration:none;font-size:11.5px;transition:.2s;border-bottom:1px solid transparent" data-lang="feedback" onmouseover="this.style.color='#CBD5E1'" onmouseout="this.style.color='#94A3B8'">Feedback</a>
       </div>
     </div>
     <!-- Right: Status & DateTime -->
     <div style="display:flex;gap:16px;align-items:center;justify-content:flex-end">
       <div style="text-align:right">
-        <div style="font-size:10px;color:#64748B;letter-spacing:.03em;text-transform:uppercase">Last Sync</div>
+        <div style="font-size:10px;color:#64748B;letter-spacing:.03em;text-transform:uppercase" data-lang="last-sync">Last Sync</div>
         <div style="font-size:11.5px;color:#CBD5E1;font-family:var(--mono);margin-top:2px" id="footer-time">26-Feb-2026 09:45:30</div>
       </div>
       <span style="width:1px;height:24px;background:rgba(148,163,184,.25)"></span>
       <div style="display:flex;align-items:center;gap:8px">
         <span style="width:8px;height:8px;background:#3B82F6;border-radius:50%;box-shadow:0 0 8px rgba(59,130,246,.5)"></span>
-        <span style="font-size:11px;color:#3B82F6;font-weight:500">System Live</span>
+        <span style="font-size:11px;color:#3B82F6;font-weight:500" data-lang="system-live">System Live</span>
       </div>
     </div>
   </div>
