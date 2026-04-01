@@ -2229,6 +2229,12 @@ button{font-family:var(--font)}
             <div class="feat-desc" id="ftdesc-fin-leakage" onclick="event.stopPropagation()">Uninvoiced demurrage, underbilled moves, detention exposure</div>
             <button class="feat-edit-btn" onclick="event.stopPropagation();editFeatDesc('fin-leakage')" title="Edit description">✏️</button>
           </div>
+          <div class="feat-btn build" style="background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:var(--fin)" onclick="navTo('fin-vendor')">
+            <div class="feat-ico">🤝</div>
+            <div class="feat-name">Vendor Management</div>
+            <div class="feat-desc" id="ftdesc-fin-vendor" onclick="event.stopPropagation()">Vendor empanelment, management & analytics</div>
+            <button class="feat-edit-btn" onclick="event.stopPropagation();editFeatDesc('fin-vendor')" title="Edit description">✏️</button>
+          </div>
           <div class="feat-btn" style="background:#F9FAFB;cursor:default">
             <div class="feat-ico">📋</div>
             <div class="feat-name">MoU Target Monitor</div>
@@ -2306,6 +2312,191 @@ button{font-family:var(--font)}
         <div class="stat-card"><div class="stat-val" style="color:#DC2626">₹0.86 Cr</div><div class="stat-lbl">Detention Exposure (MTD)</div></div>
         <div class="stat-card"><div class="stat-val" style="color:#D97706">18</div><div class="stat-lbl">Units at Risk</div></div>
         <div class="stat-card"><div class="stat-val">CTKR</div><div class="stat-lbl">Highest Terminal</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FINANCE — VENDOR MANAGEMENT
+═══════════════════════════════════════ -->
+<div class="page" id="pg-fin-vendor">
+  <div class="ph">
+    <div class="ph-header">
+      <div class="ph-icon" style="background:var(--fin-bg)">🤝</div>
+      <div><div class="ph-title">Vendor Management</div><div class="ph-sub">Vendor empanelment, management & analytics</div></div>
+      <div style="margin-left:auto;display:flex;gap:8px">
+        <button class="back-btn" onclick="navTo('fin')">← Finance</button>
+        <button class="back-btn" onclick="goHome()">⊞ Home</button>
+      </div>
+    </div>
+    <div class="tab-row" id="vendor-tabs">
+      <div class="tab active" onclick="vendorTab(this,'vm-empanel')">🤝 Vendor Empanelment & Management</div>
+      <div class="tab" onclick="vendorTab(this,'vm-analytics')">📊 Vendor Analytics</div>
+    </div>
+    
+    <!-- Tab 1: Vendor Empanelment & Management -->
+    <div class="tab-pane active" id="vm-empanel">
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:20px">
+        <div class="stat-card" style="border-top:3px solid #4338CA"><div class="stat-val" style="color:#4338CA">8</div><div class="stat-lbl">Empanelled Vendors</div><div class="stat-delta" style="color:#16A34A">↑ 2 added FY26</div></div>
+        <div class="stat-card" style="border-top:3px solid #16A34A"><div class="stat-val" style="color:#16A34A">5</div><div class="stat-lbl">Tier A Vendors</div><div class="stat-delta" style="color:#16A34A">Score ≥ 85</div></div>
+        <div class="stat-card" style="border-top:3px solid #DC2626"><div class="stat-val" style="color:#DC2626">3</div><div class="stat-lbl">Revalidation Overdue</div><div class="stat-delta" style="color:#DC2626">Action required</div></div>
+        <div class="stat-card" style="border-top:3px solid #D97706"><div class="stat-val" style="color:#D97706">₹93.4 Cr</div><div class="stat-lbl">Total PO Value FY26</div><div class="stat-delta" style="color:#D97706">8 active POs</div></div>
+        <div class="stat-card" style="border-top:3px solid #1A56DB"><div class="stat-val" style="color:#1A56DB">82</div><div class="stat-lbl">Avg Vendor Score</div><div class="stat-delta" style="color:#16A34A">↑ 4 pts vs last yr</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span>📋</span><div><div class="card-title">Vendor Register</div><div class="card-sub">All empanelled vendors and their status</div></div></div>
+        <div class="card-body">
+          <div style="display:flex;gap:10px;margin-bottom:16px;align-items:center">
+            <input class="form-input" style="max-width:280px;padding:8px 13px" placeholder="🔍  Search vendor name, ID, category...">
+            <select class="form-select" style="max-width:160px" onchange="">
+              <option value="">All Statuses</option>
+              <option>Active</option><option>Under Review</option><option>Suspended</option>
+            </select>
+            <select class="form-select" style="max-width:140px" onchange="">
+              <option value="">All Tiers</option>
+              <option>A</option><option>B</option><option>C</option>
+            </select>
+          </div>
+          <div style="overflow-x:auto">
+            <table>
+              <thead><tr>
+                <th>Vendor ID</th><th>Name & Category</th><th>Tier</th>
+                <th>Score</th><th>Status</th><th>Revalidation</th>
+                <th>PO Value</th><th>Actions</th>
+              </tr></thead>
+              <tbody>
+                <tr style="background:#FAFBFF">
+                  <td class="tm" style="color:var(--blue);font-weight:600">VND-001</td>
+                  <td><div style="font-weight:600;font-size:12px">Liebherr India Pvt. Ltd.</div><div style="font-size:10px;color:var(--ink3)">Crane & Heavy Equipment</div></td>
+                  <td><span class="chip chip-proc">Tier A</span></td>
+                  <td style="font-weight:700;font-size:13px;color:#16A34A">91/100</td>
+                  <td><span class="chip chip-green">Active</span></td>
+                  <td><span class="chip chip-green">Valid</span><div class="tm" style="font-size:10px;color:var(--ink4);margin-top:2px">2026-09-30</div></td>
+                  <td style="font-size:11.5px">₹18.4 Cr</td>
+                  <td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Vendor details loading...','#B45309')">View</button></td>
+                </tr>
+                <tr style="background:#fff">
+                  <td class="tm" style="color:var(--blue);font-weight:600">VND-002</td>
+                  <td><div style="font-weight:600;font-size:12px">Kalmar India Logistics</div><div style="font-size:10px;color:var(--ink3)">Reach Stacker & Forklift</div></td>
+                  <td><span class="chip chip-proc">Tier A</span></td>
+                  <td style="font-weight:700;font-size:13px;color:#16A34A">88/100</td>
+                  <td><span class="chip chip-green">Active</span></td>
+                  <td><span class="chip chip-amber">Due Soon</span><div class="tm" style="font-size:10px;color:var(--ink4);margin-top:2px">2026-06-30</div></td>
+                  <td style="font-size:11.5px">₹32.1 Cr</td>
+                  <td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Vendor details loading...','#B45309')">View</button></td>
+                </tr>
+                <tr style="background:#FAFBFF">
+                  <td class="tm" style="color:var(--blue);font-weight:600">VND-003</td>
+                  <td><div style="font-weight:600;font-size:12px">ZPMC Port Equipment</div><div style="font-size:10px;color:var(--ink3)">RTG & Gantry Cranes</div></td>
+                  <td><span class="chip chip-blue">Tier B</span></td>
+                  <td style="font-weight:700;font-size:13px;color:#D97706">79/100</td>
+                  <td><span class="chip chip-green">Active</span></td>
+                  <td><span class="chip chip-red">Overdue</span><div class="tm" style="font-size:10px;color:var(--ink4);margin-top:2px">2025-12-31</div></td>
+                  <td style="font-size:11.5px">₹24.0 Cr</td>
+                  <td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Vendor details loading...','#B45309')">View</button></td>
+                </tr>
+                <tr style="background:#fff">
+                  <td class="tm" style="color:var(--blue);font-weight:600">VND-004</td>
+                  <td><div style="font-weight:600;font-size:12px">National Transport Corp</div><div style="font-size:10px;color:var(--ink3)">Road Haulage & FMLM</div></td>
+                  <td><span class="chip chip-blue">Tier B</span></td>
+                  <td style="font-weight:700;font-size:13px;color:#D97706">72/100</td>
+                  <td><span class="chip chip-amber">Under Review</span></td>
+                  <td><span class="chip chip-red">Overdue</span><div class="tm" style="font-size:10px;color:var(--ink4);margin-top:2px">2026-03-31</div></td>
+                  <td style="font-size:11.5px">₹8.7 Cr</td>
+                  <td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Vendor details loading...','#B45309')">View</button></td>
+                </tr>
+                <tr style="background:#FAFBFF">
+                  <td class="tm" style="color:var(--blue);font-weight:600">VND-005</td>
+                  <td><div style="font-weight:600;font-size:12px">SafeGuard Systems Ltd</div><div style="font-size:10px;color:var(--ink3)">Fire & Safety Equipment</div></td>
+                  <td><span class="chip chip-proc">Tier A</span></td>
+                  <td style="font-weight:700;font-size:13px;color:#16A34A">85/100</td>
+                  <td><span class="chip chip-green">Active</span></td>
+                  <td><span class="chip chip-green">Valid</span><div class="tm" style="font-size:10px;color:var(--ink4);margin-top:2px">2026-12-31</div></td>
+                  <td style="font-size:11.5px">₹3.2 Cr</td>
+                  <td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Vendor details loading...','#B45309')">View</button></td>
+                </tr>
+                <tr style="background:#fff">
+                  <td class="tm" style="color:var(--blue);font-weight:600">VND-006</td>
+                  <td><div style="font-weight:600;font-size:12px">CoolFreight Systems Pvt</div><div style="font-size:10px;color:var(--ink3)">Reefer & Cold Chain</div></td>
+                  <td><span class="chip chip-blue">Tier B</span></td>
+                  <td style="font-weight:700;font-size:13px;color:#D97706">77/100</td>
+                  <td><span class="chip chip-green">Active</span></td>
+                  <td><span class="chip chip-green">Valid</span><div class="tm" style="font-size:10px;color:var(--ink4);margin-top:2px">2026-08-31</div></td>
+                  <td style="font-size:11.5px">₹1.8 Cr</td>
+                  <td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Vendor details loading...','#B45309')">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Tab 2: Vendor Analytics with Sub-tabs -->
+    <!-- Tab 2: Vendor Analytics with Sub-tabs -->
+    <div class="tab-pane" id="vm-analytics">
+      <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px">
+        <div class="stat-card" style="border-top:3px solid #4338CA"><div class="stat-val" style="color:#4338CA">₹93.4 Cr</div><div class="stat-lbl">Total Spend FY26</div><div class="stat-delta" style="color:#DC2626">↑ 18% vs FY25</div></div>
+        <div class="stat-card" style="border-top:3px solid #16A34A"><div class="stat-val" style="color:#16A34A">8</div><div class="stat-lbl">Active Vendors</div><div class="stat-delta" style="color:#16A34A">2 added FY26</div></div>
+        <div class="stat-card" style="border-top:3px solid #1A56DB"><div class="stat-val" style="color:#1A56DB">82</div><div class="stat-lbl">Avg Vendor Score</div><div class="stat-delta" style="color:#16A34A">↑ 4 pts vs FY25</div></div>
+        <div class="stat-card" style="border-top:3px solid #D97706"><div class="stat-val" style="color:#D97706">72%</div><div class="stat-lbl">On-Time Delivery</div><div class="stat-delta" style="color:#DC2626">↓ 6% vs FY25</div></div>
+        <div class="stat-card" style="border-top:3px solid #DC2626"><div class="stat-val" style="color:#DC2626">3</div><div class="stat-lbl">Reval Overdue</div><div class="stat-delta" style="color:#DC2626">Immediate action</div></div>
+        <div class="stat-card" style="border-top:3px solid #0D9488"><div class="stat-val" style="color:#0D9488">₹42 L</div><div class="stat-lbl">Avg PO Value</div><div class="stat-delta" style="color:var(--ink3)">Across 8 POs</div></div>
+      </div>
+      
+      <div class="card" style="padding:0">
+        <div class="tab-row" style="border-radius:14px 14px 0 0;padding:0 8px">
+          <div class="tab active" onclick="analyticsSubTab(this,'ana-overview')">📊 Spend Overview</div>
+          <div class="tab" onclick="analyticsSubTab(this,'ana-perf')">🏆 Vendor Performance</div>
+          <div class="tab" onclick="analyticsSubTab(this,'ana-risk')">⚠️ Risk Radar</div>
+          <div class="tab" onclick="analyticsSubTab(this,'ana-po')">📦 PO Analytics</div>
+          <div class="tab" onclick="analyticsSubTab(this,'ana-bench')">🏅 Benchmarks</div>
+        </div>
+
+        <!-- SPEND OVERVIEW -->
+        <div class="tab-pane active" id="ana-overview" style="padding:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>💰</span><div><div class="card-title">Spend by Vendor Category</div><div class="card-sub">FY 2025-26 · in ₹ Crore</div></div></div><div class="card-body"><canvas id="chart-spend-cat" width="400" height="240"></canvas></div></div>
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>🎯</span><div><div class="card-title">Spend by Vendor Tier</div><div class="card-sub">Concentration risk view</div></div></div><div class="card-body" style="display:flex;align-items:center;justify-content:center"><canvas id="chart-tier" width="240" height="200" style="max-width:200px"></canvas><div style="margin-left:24px;display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px"><div style="width:14px;height:14px;border-radius:4px;background:#4338CA"></div><div><div style="font-size:12px;font-weight:700">Tier A</div><div style="font-size:11px;color:var(--ink3)">₹55.6 Cr · 60%</div></div></div><div style="display:flex;align-items:center;gap:10px"><div style="width:14px;height:14px;border-radius:4px;background:#6366F1"></div><div><div style="font-size:12px;font-weight:700">Tier B</div><div style="font-size:11px;color:var(--ink3)">₹31.5 Cr · 34%</div></div></div><div style="display:flex;align-items:center;gap:10px"><div style="width:14px;height:14px;border-radius:4px;background:#C7D2FE"></div><div><div style="font-size:12px;font-weight:700">Tier C</div><div style="font-size:11px;color:var(--ink3)">₹6.3 Cr · 7%</div></div></div></div></div></div>
+          </div>
+          <div class="card" style="margin-bottom:20px"><div class="card-header"><span>📈</span><div><div class="card-title">Monthly Procurement Spend Trend</div><div class="card-sub">FY 2025-26 · ₹ Lakh</div></div></div><div class="card-body"><canvas id="chart-monthly" width="600" height="160"></canvas></div></div>
+          <div class="card"><div class="card-header"><span>🏆</span><div><div class="card-title">Top Vendors by Spend</div><div class="card-sub">FY 2025-26</div></div></div><div class="card-body" style="padding:0"><table><thead><tr><th>#</th><th>Vendor</th><th>Category</th><th>PO Value</th><th>% of Total Spend</th><th>Tier</th><th>Score</th></tr></thead><tbody><tr><td style="font-weight:700;color:#B45309">1</td><td class="tb2">National Transport Corp</td><td style="font-size:11px">Road Haulage & FMLM</td><td style="font-weight:700">₹8.7 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:34%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">34%</span></div></td><td><span class="chip chip-blue">Tier B</span></td><td style="font-weight:700;color:#D97706">72/100</td></tr><tr><td style="font-weight:700;color:#6B7280">2</td><td class="tb2">Kalmar India Logistics</td><td style="font-size:11px">Reach Stacker & Forklift</td><td style="font-weight:700">₹32.1 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:24%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">24%</span></div></td><td><span class="chip chip-proc">Tier A</span></td><td style="font-weight:700;color:#16A34A">88/100</td></tr><tr><td style="font-weight:700;color:#6B7280">3</td><td class="tb2">Rapid IT Solutions</td><td style="font-size:11px">IT Infrastructure & Software</td><td style="font-weight:700">₹4.1 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:18%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">18%</span></div></td><td><span class="chip chip-grey">Tier C</span></td><td style="font-weight:700;color:#DC2626">68/100</td></tr><tr><td style="font-weight:700;color:#6B7280">4</td><td class="tb2">Liebherr India Pvt. Ltd.</td><td style="font-size:11px">Crane & Heavy Equipment</td><td style="font-weight:700">₹18.4 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:9%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">9%</span></div></td><td><span class="chip chip-proc">Tier A</span></td><td style="font-weight:700;color:#16A34A">91/100</td></tr><tr><td style="font-weight:700;color:#6B7280">5</td><td class="tb2">SafeGuard Systems Ltd</td><td style="font-size:11px">Fire & Safety Equipment</td><td style="font-weight:700">₹3.2 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:4%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">4%</span></div></td><td><span class="chip chip-proc">Tier A</span></td><td style="font-weight:700;color:#16A34A">85/100</td></tr><tr><td style="font-weight:700;color:#6B7280">6</td><td class="tb2">CoolFreight Systems Pvt</td><td style="font-size:11px">Reefer & Cold Chain</td><td style="font-weight:700">₹1.8 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:2%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">2%</span></div></td><td><span class="chip chip-blue">Tier B</span></td><td style="font-weight:700;color:#D97706">77/100</td></tr><tr><td style="font-weight:700;color:#6B7280">7</td><td class="tb2">ZPMC Port Equipment</td><td style="font-size:11px">RTG & Gantry Cranes</td><td style="font-weight:700">₹24.0 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:1%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">1%</span></div></td><td><span class="chip chip-blue">Tier B</span></td><td style="font-weight:700;color:#D97706">79/100</td></tr><tr><td style="font-weight:700;color:#6B7280">8</td><td class="tb2">Apex Electrical Works</td><td style="font-size:11px">Electrical & Power</td><td style="font-weight:700">₹0.9 Cr</td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:6px;background:#E2E8F0;border-radius:3px;flex:1;overflow:hidden"><div style="width:1%;height:100%;background:#4338CA;border-radius:3px"></div></div><span style="font-size:10.5px;font-weight:600;color:var(--ink3)">1%</span></div></td><td><span class="chip chip-blue">Tier B</span></td><td style="font-weight:700;color:#D97706">82/100</td></tr></tbody></table></div></div>
+        </div>
+
+        <!-- PERFORMANCE -->
+        <div class="tab-pane" id="ana-perf" style="padding:20px">
+          <div class="card" style="margin-bottom:20px"><div class="card-header"><span>📊</span><div><div class="card-title">Vendor Score Comparison</div><div class="card-sub">Compliance · Delivery · Quality · Overall</div></div></div><div class="card-body"><canvas id="chart-radar" width="600" height="260"></canvas></div></div>
+          <div class="card"><div class="card-header"><span>🏆</span><div><div class="card-title">Performance Scorecard</div><div class="card-sub">All metrics for current empanelment period</div></div></div><div class="card-body" style="padding:0"><table><thead><tr><th>Vendor</th><th>Tier</th><th>Overall Score</th><th>Compliance%</th><th>On-Time Del%</th><th>Quality%</th><th>POs</th><th>Trend</th><th>Action</th></tr></thead><tbody><tr><td><div class="tb2" style="font-size:12px">Liebherr India Pvt. Ltd.</div><div style="font-size:10px;color:var(--ink3)">Crane & Heavy Equipment</div></td><td><span class="chip chip-proc">Tier A</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:91%;height:100%;background:#16A34A;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#16A34A">91</span></div></td><td style="font-weight:700;color:#16A34A">96%</td><td style="font-weight:700;color:#16A34A">94%</td><td style="font-weight:700;color:#16A34A">89%</td><td style="font-weight:700">12</td><td style="color:#16A34A">↑ Improving</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">Kalmar India Logistics</div><div style="font-size:10px;color:var(--ink3)">Reach Stacker & Forklift</div></td><td><span class="chip chip-proc">Tier A</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:88%;height:100%;background:#16A34A;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#16A34A">88</span></div></td><td style="font-weight:700;color:#16A34A">92%</td><td style="font-weight:700;color:#16A34A">90%</td><td style="font-weight:700;color:#16A34A">87%</td><td style="font-weight:700">24</td><td style="color:#16A34A">↑ Improving</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">SafeGuard Systems Ltd</div><div style="font-size:10px;color:var(--ink3)">Fire & Safety Equipment</div></td><td><span class="chip chip-proc">Tier A</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:85%;height:100%;background:#16A34A;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#16A34A">85</span></div></td><td style="font-weight:700;color:#16A34A">88%</td><td style="font-weight:700;color:#D97706">84%</td><td style="font-weight:700;color:#D97706">82%</td><td style="font-weight:700">9</td><td style="color:#16A34A">↑ Improving</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">Apex Electrical Works</div><div style="font-size:10px;color:var(--ink3)">Electrical & Power</div></td><td><span class="chip chip-blue">Tier B</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:82%;height:100%;background:#D97706;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#D97706">82</span></div></td><td style="font-weight:700;color:#D97706">84%</td><td style="font-weight:700;color:#D97706">81%</td><td style="font-weight:700;color:#D97706">80%</td><td style="font-weight:700">3</td><td style="color:#D97706">→ Stable</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">ZPMC Port Equipment</div><div style="font-size:10px;color:var(--ink3)">RTG & Gantry Cranes</div></td><td><span class="chip chip-blue">Tier B</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:79%;height:100%;background:#D97706;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#D97706">79</span></div></td><td style="font-weight:700;color:#D97706">81%</td><td style="font-weight:700;color:#D97706">76%</td><td style="font-weight:700;color:#D97706">80%</td><td style="font-weight:700">4</td><td style="color:#D97706">→ Stable</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">CoolFreight Systems Pvt</div><div style="font-size:10px;color:var(--ink3)">Reefer & Cold Chain</div></td><td><span class="chip chip-blue">Tier B</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:77%;height:100%;background:#D97706;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#D97706">77</span></div></td><td style="font-weight:700;color:#D97706">79%</td><td style="font-weight:700;color:#D97706">75%</td><td style="font-weight:700;color:#D97706">76%</td><td style="font-weight:700">6</td><td style="color:#D97706">→ Stable</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">National Transport Corp</div><div style="font-size:10px;color:var(--ink3)">Road Haulage & FMLM</div></td><td><span class="chip chip-blue">Tier B</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:72%;height:100%;background:#D97706;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#D97706">72</span></div></td><td style="font-weight:700;color:#D97706">74%</td><td style="font-weight:700;color:#DC2626">68%</td><td style="font-weight:700;color:#D97706">73%</td><td style="font-weight:700">38</td><td style="color:#D97706">↓ Watch</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr><tr><td><div class="tb2" style="font-size:12px">Rapid IT Solutions</div><div style="font-size:10px;color:var(--ink3)">IT Infrastructure & Software</div></td><td><span class="chip chip-grey">Tier C</span></td><td><div style="display:flex;align-items:center;gap:8px"><div style="height:8px;background:#E2E8F0;border-radius:4px;width:60px;overflow:hidden"><div style="width:68%;height:100%;background:#DC2626;border-radius:4px"></div></div><span style="font-weight:800;font-size:13px;color:#DC2626">68</span></div></td><td style="font-weight:700;color:#DC2626">61%</td><td style="font-weight:700;color:#DC2626">65%</td><td style="font-weight:700;color:#D97706">70%</td><td style="font-weight:700">15</td><td style="color:#D97706">↓ Watch</td><td><button class="btn-ghost" style="padding:4px 10px;font-size:10.5px" onclick="showToast('Performance history loading...','#4338CA')">History</button></td></tr></tbody></table></div></div>
+        </div>
+
+        <!-- RISK -->
+        <div class="tab-pane" id="ana-risk" style="padding:20px">
+          <div class="alert alert-danger"><span>🔴</span><div><strong>High-risk vendors identified:</strong> 2 vendors have scores below 80 with overdue revalidations. New POs require Procurement Head approval.</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>⚠️</span><div><div class="card-title">Risk Matrix</div><div class="card-sub">Score vs On-Time Delivery</div></div></div><div class="card-body"><canvas id="chart-risk-matrix" width="400" height="260"></canvas></div></div>
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>📋</span><div><div class="card-title">Risk Register</div></div></div><div class="card-body" style="padding:0"><table><thead><tr><th>Vendor</th><th>Risk Level</th><th>Flags</th></tr></thead><tbody><tr><td class="tb2" style="font-size:11.5px">Rapid IT Solutions</td><td><span class="chip chip-red">High</span></td><td style="font-size:10.5px">Overdue reval, Score < 75</td></tr><tr><td class="tb2" style="font-size:11.5px">National Transport Corp</td><td><span class="chip chip-red">High</span></td><td style="font-size:10.5px">Overdue reval, Score < 75</td></tr><tr><td class="tb2" style="font-size:11.5px">CoolFreight Systems Pvt</td><td><span class="chip chip-amber">Medium</span></td><td style="font-size:10.5px">—</td></tr><tr><td class="tb2" style="font-size:11.5px">ZPMC Port Equipment</td><td><span class="chip chip-amber">Medium</span></td><td style="font-size:10.5px">Overdue revalidation</td></tr><tr><td class="tb2" style="font-size:11.5px">Apex Electrical Works</td><td><span class="chip chip-amber">Medium</span></td><td style="font-size:10.5px">—</td></tr><tr><td class="tb2" style="font-size:11.5px">SafeGuard Systems Ltd</td><td><span class="chip chip-green">Low</span></td><td style="font-size:10.5px">—</td></tr><tr><td class="tb2" style="font-size:11.5px">Kalmar India Logistics</td><td><span class="chip chip-green">Low</span></td><td style="font-size:10.5px">Revalidation due soon</td></tr><tr><td class="tb2" style="font-size:11.5px">Liebherr India Pvt. Ltd.</td><td><span class="chip chip-green">Low</span></td><td style="font-size:10.5px">—</td></tr></tbody></table></div></div>
+          </div>
+          <div class="card"><div class="card-header"><span>🏆</span><div><div class="card-title">Spend Concentration Risk</div><div class="card-sub">Single-vendor dependency analysis</div></div></div><div class="card-body"><div class="alert alert-warn"><span>⚠️</span><div><strong>Liebherr India</strong> accounts for ₹18.4 Cr (34% of total spend) — highest single-vendor dependency. Consider qualifying an alternate vendor.</div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">National Transport Corp</span><span style="font-weight:700;color:#4338CA">34% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:34%;height:100%;background:#4338CA;border-radius:4px;opacity:1.0"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Kalmar India Logistics</span><span style="font-weight:700;color:#4338CA">24% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:24%;height:100%;background:#4338CA;border-radius:4px;opacity:0.9"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Rapid IT Solutions</span><span style="font-weight:700;color:#4338CA">18% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:18%;height:100%;background:#4338CA;border-radius:4px;opacity:0.8"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Liebherr India Pvt. Ltd.</span><span style="font-weight:700;color:#4338CA">9% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:9%;height:100%;background:#4338CA;border-radius:4px;opacity:0.7"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">SafeGuard Systems Ltd</span><span style="font-weight:700;color:#4338CA">4% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:4%;height:100%;background:#4338CA;border-radius:4px;opacity:0.6"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">CoolFreight Systems Pvt</span><span style="font-weight:700;color:#4338CA">2% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:2%;height:100%;background:#4338CA;border-radius:4px;opacity:0.5"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">ZPMC Port Equipment</span><span style="font-weight:700;color:#4338CA">1% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:1%;height:100%;background:#4338CA;border-radius:4px;opacity:0.4"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Apex Electrical Works</span><span style="font-weight:700;color:#4338CA">1% of spend</span></div><div style="height:8px;background:#E2E8F0;border-radius:4px;overflow:hidden"><div style="width:1%;height:100%;background:#4338CA;border-radius:4px;opacity:0.3"></div></div></div></div></div>
+        </div>
+
+        <!-- PO ANALYTICS -->
+        <div class="tab-pane" id="ana-po" style="padding:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>📦</span><div><div class="card-title">PO Status Breakdown</div></div></div><div class="card-body" style="display:flex;align-items:center;justify-content:center"><canvas id="chart-po-status" width="200" height="160" style="max-width:160px"></canvas><div style="margin-left:18px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:3px;background:#16A34A"></div><div style="font-size:11.5px"><div style="font-weight:700">GRN Done</div><div style="color:var(--ink3)">4 POs</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:3px;background:#4338CA"></div><div style="font-size:11.5px"><div style="font-weight:700">Active</div><div style="color:var(--ink3)">2 POs</div></div></div><div style="display:flex;align-items:center;gap:8px"><div style="width:12px;height:12px;border-radius:3px;background:#DC2626"></div><div style="font-size:11.5px"><div style="font-weight:700">Overdue</div><div style="color:var(--ink3)">2 POs</div></div></div></div></div></div>
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>📅</span><div><div class="card-title">Avg. GRN Turnaround</div><div class="card-sub">Days from PO to GRN</div></div></div><div class="card-body"><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--ink3)">Crane & Equipment</span><span style="font-weight:700">22d avg</span></div><div style="height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="width:48%;height:100%;background:#DC2626;border-radius:3px"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--ink3)">Road Haulage</span><span style="font-weight:700">8d avg</span></div><div style="height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="width:17%;height:100%;background:#D97706;border-radius:3px"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--ink3)">Fire & Safety</span><span style="font-weight:700">15d avg</span></div><div style="height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="width:33%;height:100%;background:#D97706;border-radius:3px"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--ink3)">Electrical</span><span style="font-weight:700">11d avg</span></div><div style="height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="width:24%;height:100%;background:#D97706;border-radius:3px"></div></div></div><div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px"><span style="color:var(--ink3)">IT Infrastructure</span><span style="font-weight:700">38d avg</span></div><div style="height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="width:84%;height:100%;background:#DC2626;border-radius:3px"></div></div></div></div></div>
+            <div class="card" style="margin-bottom:0"><div class="card-header"><span>💰</span><div><div class="card-title">PO Value Distribution</div><div class="card-sub">By value band</div></div></div><div class="card-body"><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600">< ₹10 L</div><div style="font-size:10.5px;color:var(--ink3)">2 POs</div></div><div style="font-size:13px;font-weight:700;color:#4338CA">25%</div></div><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600">₹10 L – ₹1 Cr</div><div style="font-size:10.5px;color:var(--ink3)">3 POs</div></div><div style="font-size:13px;font-weight:700;color:#4338CA">38%</div></div><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border)"><div><div style="font-size:12px;font-weight:600">₹1 Cr – ₹10 Cr</div><div style="font-size:10.5px;color:var(--ink3)">2 POs</div></div><div style="font-size:13px;font-weight:700;color:#4338CA">25%</div></div><div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0"><div><div style="font-size:12px;font-weight:600">> ₹10 Cr</div><div style="font-size:10.5px;color:var(--ink3)">1 POs</div></div><div style="font-size:13px;font-weight:700;color:#4338CA">12%</div></div></div></div>
+          </div>
+          <div class="card"><div class="card-header"><span>📈</span><div><div class="card-title">PO Fulfilment Rate Trend</div><div class="card-sub">% POs with on-time GRN · quarterly</div></div></div><div class="card-body"><canvas id="chart-po-trend" width="600" height="160"></canvas></div></div>
+        </div>
+
+        <!-- BENCHMARKS -->
+        <div class="tab-pane" id="ana-bench" style="padding:20px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+            <div class="card" style="margin-bottom:0"><div class="card-header" style="background:linear-gradient(135deg,#EEF2FF,#E0E7FF)"><span>🏅</span><div><div class="card-title">Score Distribution</div><div class="card-sub">All empanelled vendors</div></div></div><div class="card-body"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px"><div style="text-align:center;padding:12px;background:#F0FDF4;border-radius:10px;border:1px solid #BBF7D0"><div style="font-size:24px;font-weight:800;color:#16A34A">3</div><div style="font-size:10.5px;color:#16A34A;font-weight:600">Score ≥ 85</div><div style="font-size:9.5px;color:var(--ink3)">Tier A eligible</div></div><div style="text-align:center;padding:12px;background:#FFFBEB;border-radius:10px;border:1px solid #FDE68A"><div style="font-size:24px;font-weight:800;color:#D97706">4</div><div style="font-size:10.5px;color:#D97706;font-weight:600">Score 70–84</div><div style="font-size:9.5px;color:var(--ink3)">Tier B</div></div><div style="text-align:center;padding:12px;background:#FEF2F2;border-radius:10px;border:1px solid #FECACA"><div style="font-size:24px;font-weight:800;color:#DC2626">1</div><div style="font-size:10.5px;color:#DC2626;font-weight:600">Score < 70</div><div style="font-size:9.5px;color:var(--ink3)">Review needed</div></div></div><canvas id="chart-score-dist" width="500" height="160"></canvas></div></div><div class="card" style="margin-bottom:0"><div class="card-header"><span>🎯</span><div><div class="card-title">Target vs Actuals</div><div class="card-sub">Procurement KPI targets FY26</div></div></div><div class="card-body"><div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">On-Time Delivery</span><span><span style="font-weight:800;color:#D97706">72%</span><span style="color:var(--ink4)"> / 85%</span></span></div><div style="position:relative;height:10px;background:#E2E8F0;border-radius:5px;overflow:hidden"><div style="height:100%;width:72%;background:#4338CA;border-radius:5px;opacity:.9"></div><div style="position:absolute;top:0;left:85%;width:2px;height:100%;background:#DC2626"></div></div><div style="font-size:9.5px;color:var(--ink4);margin-top:3px">Target: 85% · Actual: 72%</div></div><div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Vendor Compliance</span><span><span style="font-weight:800;color:#16A34A">86%</span><span style="color:var(--ink4)"> / 90%</span></span></div><div style="position:relative;height:10px;background:#E2E8F0;border-radius:5px;overflow:hidden"><div style="height:100%;width:86%;background:#4338CA;border-radius:5px;opacity:.9"></div><div style="position:absolute;top:0;left:90%;width:2px;height:100%;background:#DC2626"></div></div><div style="font-size:9.5px;color:var(--ink4);margin-top:3px">Target: 90% · Actual: 86%</div></div><div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">PO Fulfilment</span><span><span style="font-weight:800;color:#16A34A">88%</span><span style="color:var(--ink4)"> / 95%</span></span></div><div style="position:relative;height:10px;background:#E2E8F0;border-radius:5px;overflow:hidden"><div style="height:100%;width:88%;background:#4338CA;border-radius:5px;opacity:.9"></div><div style="position:absolute;top:0;left:95%;width:2px;height:100%;background:#DC2626"></div></div><div style="font-size:9.5px;color:var(--ink4);margin-top:3px">Target: 95% · Actual: 88%</div></div><div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Revalidation Completion</span><span><span style="font-weight:800;color:#DC2626">62%</span><span style="color:var(--ink4)"> / 100%</span></span></div><div style="position:relative;height:10px;background:#E2E8F0;border-radius:5px;overflow:hidden"><div style="height:100%;width:62%;background:#4338CA;border-radius:5px;opacity:.9"></div><div style="position:absolute;top:0;left:100%;width:2px;height:100%;background:#DC2626"></div></div><div style="font-size:9.5px;color:var(--ink4);margin-top:3px">Target: 100% · Actual: 62%</div></div><div style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px"><span style="font-weight:600">Avg Quality Score</span><span><span style="font-weight:800;color:#D97706">82%</span><span style="color:var(--ink4)"> / 85%</span></span></div><div style="position:relative;height:10px;background:#E2E8F0;border-radius:5px;overflow:hidden"><div style="height:100%;width:82%;background:#4338CA;border-radius:5px;opacity:.9"></div><div style="position:absolute;top:0;left:85%;width:2px;height:100%;background:#DC2626"></div></div><div style="font-size:9.5px;color:var(--ink4);margin-top:3px">Target: 85% · Actual: 82%</div></div></div></div>
+          </div>
+          <div class="card"><div class="card-header"><span>📅</span><div><div class="card-title">Year-on-Year Comparison</div><div class="card-sub">Key metrics — FY24 vs FY25 vs FY26</div></div></div><div class="card-body"><canvas id="chart-yoy" width="600" height="180"></canvas></div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -5068,6 +5259,20 @@ function leakTab(el, pane){
   el.parentNode.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
   el.classList.add('active');
   document.querySelectorAll('#pg-fin-leakage .tab-pane').forEach(function(p){p.classList.remove('active')});
+  var tp = document.getElementById(pane); if(tp)tp.classList.add('active');
+}
+
+function vendorTab(el, pane){
+  el.parentNode.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  document.querySelectorAll('#pg-fin-vendor .tab-pane').forEach(function(p){p.classList.remove('active')});
+  var tp = document.getElementById(pane); if(tp)tp.classList.add('active');
+}
+
+function analyticsSubTab(el, pane){
+  el.parentNode.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+  el.classList.add('active');
+  document.querySelectorAll('#vm-analytics .tab-pane').forEach(function(p){p.classList.remove('active')});
   var tp = document.getElementById(pane); if(tp)tp.classList.add('active');
 }
 
@@ -8790,14 +8995,168 @@ function searchContainer(){
 </footer>
 </div><!-- /app -->
 
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-// Update footer timestamp every second
-setInterval(()=>{
-  const now=new Date();
-  const fmt=`${String(now.getDate()).padStart(2,'0')}-${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][now.getMonth()]}-${now.getFullYear()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}:${String(now.getSeconds()).padStart(2,'0')}`;
-  const el=document.getElementById('footer-time');
-  if(el)el.textContent=fmt;
-},1000);
+// Store chart instances globally
+window.vendorCharts = {};
+
+// Vendor Analytics - Chart.js Initialization
+function initializeVendorAnalyticsCharts() {
+  // Check if Chart library is available
+  if (typeof Chart === 'undefined') {
+    console.error('Chart.js not loaded');
+    setTimeout(initializeVendorAnalyticsCharts, 100);
+    return;
+  }
+
+  const chartConfigs = [
+    { id: 'chart-spend-cat', elemId: 'chart-spend-cat' },
+    { id: 'chart-tier', elemId: 'chart-tier' },
+    { id: 'chart-monthly', elemId: 'chart-monthly' },
+    { id: 'chart-radar', elemId: 'chart-radar' },
+    { id: 'chart-risk-matrix', elemId: 'chart-risk-matrix' },
+    { id: 'chart-po-status', elemId: 'chart-po-status' },
+    { id: 'chart-po-trend', elemId: 'chart-po-trend' },
+    { id: 'chart-score-dist', elemId: 'chart-score-dist' },
+    { id: 'chart-yoy', elemId: 'chart-yoy' }
+  ];
+
+  const empanelChartConfigs = [
+    { id: 'emp-chart-spend-cat', elemId: 'emp-chart-spend-cat' },
+    { id: 'emp-chart-tier', elemId: 'emp-chart-tier' },
+    { id: 'emp-chart-monthly', elemId: 'emp-chart-monthly' },
+    { id: 'emp-chart-radar', elemId: 'emp-chart-radar' },
+    { id: 'emp-chart-risk-matrix', elemId: 'emp-chart-risk-matrix' },
+    { id: 'emp-chart-po-trend', elemId: 'emp-chart-po-trend' },
+    { id: 'emp-chart-score-dist', elemId: 'emp-chart-score-dist' },
+    { id: 'emp-chart-yoy', elemId: 'emp-chart-yoy' }
+  ];
+
+  const getChartConfig = (type, configName) => {
+    const configs = {
+      'bar-spend': {
+        type: 'bar',
+        data: {
+          labels: ['Road Haulage', 'Reach Stacker', 'Crane & Equip', 'Fire & Safety', 'IT Infrastructure'],
+          datasets: [{ label: '₹ Crore', data: [8.7, 32.1, 18.4, 3.2, 4.1], backgroundColor: ['#4338CA', '#6366F1', '#8B5CF6', '#A78BFA', '#C4B5FD'], borderRadius: 6, borderSkipped: false }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
+      },
+      'doughnut-tier': {
+        type: 'doughnut',
+        data: { labels: ['Tier A', 'Tier B', 'Tier C'], datasets: [{ data: [55.6, 31.5, 6.3], backgroundColor: ['#4338CA', '#6366F1', '#C7D2FE'], borderColor: '#fff', borderWidth: 2 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
+      },
+      'line-monthly': {
+        type: 'line',
+        data: { labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], datasets: [{ label: '₹ Lakh', data: [7200, 8500, 9000, 8100, 9600, 8600, 7800, 8200, 9100], borderColor: '#4338CA', backgroundColor: 'rgba(67, 56, 202, 0.05)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#4338CA', pointBorderColor: '#fff', pointBorderWidth: 2 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+      },
+      'radar': {
+        type: 'radar',
+        data: { labels: ['Compliance', 'On-Time Delivery', 'Quality', 'Documentation', 'Communication'], datasets: [{ label: 'Liebherr India', data: [96, 94, 89, 92, 90], borderColor: '#16A34A', backgroundColor: 'rgba(22, 163, 74, 0.1)', pointBackgroundColor: '#16A34A' }, { label: 'Kalmar India', data: [92, 90, 87, 88, 85], borderColor: '#4338CA', backgroundColor: 'rgba(67, 56, 202, 0.1)', pointBackgroundColor: '#4338CA' }, { label: 'Rapid IT Solutions', data: [61, 65, 70, 60, 55], borderColor: '#DC2626', backgroundColor: 'rgba(220, 38, 38, 0.1)', pointBackgroundColor: '#DC2626' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+      },
+      'scatter-risk': {
+        type: 'scatter',
+        data: { datasets: [{ label: 'Low Risk', data: [{x: 91, y: 94}, {x: 88, y: 90}, {x: 85, y: 84}], backgroundColor: '#16A34A', borderColor: '#16A34A' }, { label: 'Medium Risk', data: [{x: 82, y: 81}, {x: 79, y: 76}, {x: 77, y: 75}], backgroundColor: '#D97706', borderColor: '#D97706' }, { label: 'High Risk', data: [{x: 72, y: 68}, {x: 68, y: 65}], backgroundColor: '#DC2626', borderColor: '#DC2626' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { x: { title: { display: true, text: 'Vendor Score' }, min: 60, max: 100 }, y: { title: { display: true, text: 'On-Time Delivery %' }, min: 60, max: 100 } } }
+      },
+      'doughnut-po': {
+        type: 'doughnut',
+        data: { labels: ['GRN Done', 'Active', 'Overdue'], datasets: [{ data: [4, 2, 2], backgroundColor: ['#16A34A', '#4338CA', '#DC2626'], borderColor: '#fff', borderWidth: 2 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      },
+      'line-trend': {
+        type: 'line',
+        data: { labels: ['Q1 FY24', 'Q2 FY24', 'Q3 FY24', 'Q4 FY24', 'Q1 FY25', 'Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26'], datasets: [{ label: 'On-Time %', data: [85, 82, 78, 75, 73, 70, 72, 70, 72], borderColor: '#4338CA', backgroundColor: 'rgba(67, 56, 202, 0.05)', fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#4338CA' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 60, max: 90 } } }
+      },
+      'bar-dist': {
+        type: 'bar',
+        data: { labels: ['≥ 85', '70-84', '< 70'], datasets: [{ label: 'Vendors', data: [3, 4, 1], backgroundColor: ['#16A34A', '#D97706', '#DC2626'], borderRadius: 4 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+      },
+      'bar-yoy': {
+        type: 'bar',
+        data: { labels: ['On-Time Del', 'Compliance', 'Quality Score', 'Avg Vendor Score'], datasets: [{ label: 'FY24', data: [85, 88, 86, 80], backgroundColor: '#C7D2FE' }, { label: 'FY25', data: [78, 86, 84, 78], backgroundColor: '#6366F1' }, { label: 'FY26', data: [72, 86, 82, 82], backgroundColor: '#4338CA' }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, max: 100 } } }
+      }
+    };
+    return configs[configName];
+  };
+
+  // Map chart IDs to config types
+  const chartTypeMap = {
+    'chart-spend-cat': 'bar-spend', 'emp-chart-spend-cat': 'bar-spend',
+    'chart-tier': 'doughnut-tier', 'emp-chart-tier': 'doughnut-tier',
+    'chart-monthly': 'line-monthly', 'emp-chart-monthly': 'line-monthly',
+    'chart-radar': 'radar', 'emp-chart-radar': 'radar',
+    'chart-risk-matrix': 'scatter-risk', 'emp-chart-risk-matrix': 'scatter-risk',
+    'chart-po-status': 'doughnut-po',
+    'chart-po-trend': 'line-trend', 'emp-chart-po-trend': 'line-trend',
+    'chart-score-dist': 'bar-dist', 'emp-chart-score-dist': 'bar-dist',
+    'chart-yoy': 'bar-yoy', 'emp-chart-yoy': 'bar-yoy'
+  };
+
+  // Initialize analytics charts
+  window.vendorCharts = window.vendorCharts || {};
+  chartConfigs.concat(empanelChartConfigs).forEach(config => {
+    const el = document.getElementById(config.elemId);
+    if (el && !window.vendorCharts[config.elemId]) {
+      try {
+        const chartType = chartTypeMap[config.elemId];
+        const chartCfg = getChartConfig(null, chartType);
+        const ctx = el.getContext('2d');
+        window.vendorCharts[config.elemId] = new Chart(ctx, chartCfg);
+        console.log('✓ Chart initialized:', config.elemId);
+      } catch (e) {
+        console.error('Chart init failed:', config.elemId, e);
+      }
+    }
+  });
+  
+  // Store empanel charts reference
+  window.empanelCharts = Object.fromEntries(
+    empanelChartConfigs
+      .map(c => [c.elemId, window.vendorCharts[c.elemId]])
+      .filter(([_, chart]) => chart)
+  );
+}
+
+// Initialize charts when analytics tab is opened
+function analyticsSubTab(el, tabId) {
+  document.querySelectorAll('#vm-analytics .tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#vm-analytics .tab-pane').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const pane = document.getElementById(tabId);
+  if (pane) {
+    pane.classList.add('active');
+    // Trigger chart resize after tab transition
+    setTimeout(() => {
+      Object.values(window.vendorCharts).forEach(chart => {
+        if (chart && typeof chart.resize === 'function') {
+          chart.resize();
+        }
+      });
+    }, 150);
+  }
+}
+
+// Initialize immediately when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(initializeVendorAnalyticsCharts, 150);
+});
+
+// Also initialize on page navigation
+const originalNavTo = window.navTo;
+window.navTo = function(page) {
+  if (originalNavTo) originalNavTo.call(this, page);
+  if (page === 'vm' || page === 'analytics') {
+    setTimeout(initializeVendorAnalyticsCharts, 250);
+  }
+};
 </script>
 
 </body>
