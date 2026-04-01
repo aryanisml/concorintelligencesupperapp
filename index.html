@@ -9003,128 +9003,154 @@ window.vendorCharts = {};
 
 const VENDORS = [{"id": "VND-001", "name": "Liebherr India Pvt. Ltd.", "init": "LI", "cat": "Crane & Heavy Equipment", "gstin": "27AAACL0000L1ZX", "pan": "AAACL0000L", "state": "Maharashtra", "since": 2018, "score": 91, "tier": "A", "status": "Active", "reval": "2026-09-30", "po_count": 12, "po_value": "\u20b918.4 Cr", "compliance": 96, "delivery": 94, "quality": 89, "contact": "Suresh Nair", "email": "procurement@liebherr-india.com", "certifications": ["ISO 9001", "ISO 45001", "NSIC"], "blacklisted": false, "reval_status": "Valid"}, {"id": "VND-002", "name": "Kalmar India Logistics", "init": "KL", "cat": "Reach Stacker & Forklift", "gstin": "07AAACK0000K1ZY", "pan": "AAACK0000K", "state": "Delhi", "since": 2016, "score": 88, "tier": "A", "status": "Active", "reval": "2026-06-30", "po_count": 24, "po_value": "\u20b932.1 Cr", "compliance": 92, "delivery": 90, "quality": 87, "contact": "Amita Gupta", "email": "kalmar.india@kalmarcorp.com", "certifications": ["ISO 9001", "CE Mark"], "blacklisted": false, "reval_status": "Due Soon"}, {"id": "VND-003", "name": "ZPMC Port Equipment", "init": "ZP", "cat": "RTG & Gantry Cranes", "gstin": "09AAAZP0000P1ZZ", "pan": "AAAZP0000P", "state": "Gujarat", "since": 2020, "score": 79, "tier": "B", "status": "Active", "reval": "2025-12-31", "po_count": 4, "po_value": "\u20b924.0 Cr", "compliance": 81, "delivery": 76, "quality": 80, "contact": "Wangjun Li", "email": "india@zpmc.com", "certifications": ["ISO 9001"], "blacklisted": false, "reval_status": "Overdue"}, {"id": "VND-004", "name": "National Transport Corp", "init": "NT", "cat": "Road Haulage & FMLM", "gstin": "06AAANT0000N1ZA", "pan": "AAANT0000N", "state": "Haryana", "since": 2019, "score": 72, "tier": "B", "status": "Under Review", "reval": "2026-03-31", "po_count": 38, "po_value": "\u20b98.7 Cr", "compliance": 74, "delivery": 68, "quality": 73, "contact": "Pradeep Singh", "email": "ntc.procurement@gmail.com", "certifications": ["ISO 9001"], "blacklisted": false, "reval_status": "Overdue"}, {"id": "VND-005", "name": "SafeGuard Systems Ltd", "init": "SG", "cat": "Fire & Safety Equipment", "gstin": "27AAACS0000S1ZB", "pan": "AAACS0000S", "state": "Maharashtra", "since": 2021, "score": 85, "tier": "A", "status": "Active", "reval": "2026-12-31", "po_count": 9, "po_value": "\u20b93.2 Cr", "compliance": 88, "delivery": 84, "quality": 82, "contact": "Meena Iyer", "email": "sg.tender@safeguard.in", "certifications": ["ISO 9001", "ISO 45001", "BIS"], "blacklisted": false, "reval_status": "Valid"}, {"id": "VND-006", "name": "CoolFreight Systems Pvt", "init": "CF", "cat": "Reefer & Cold Chain", "gstin": "33AAACC0000C1ZC", "pan": "AAACC0000C", "state": "Tamil Nadu", "since": 2022, "score": 77, "tier": "B", "status": "Active", "reval": "2026-08-31", "po_count": 6, "po_value": "\u20b91.8 Cr", "compliance": 79, "delivery": 75, "quality": 76, "contact": "Rajiv Menon", "email": "cfsindia@coolfreight.com", "certifications": ["ISO 9001", "FSSAI"], "blacklisted": false, "reval_status": "Valid"}, {"id": "VND-007", "name": "Rapid IT Solutions", "init": "RI", "cat": "IT Infrastructure & Software", "gstin": "07AAARI0000R1ZD", "pan": "AAARI0000R", "state": "Delhi", "since": 2017, "score": 68, "tier": "C", "status": "Suspended", "reval": "2025-06-30", "po_count": 15, "po_value": "\u20b94.1 Cr", "compliance": 61, "delivery": 65, "quality": 70, "contact": "Aman Khanna", "email": "rapid.it@solutions.in", "certifications": [], "blacklisted": false, "reval_status": "Overdue"}, {"id": "VND-008", "name": "Apex Electrical Works", "init": "AE", "cat": "Electrical & Power", "gstin": "29AAAAE0000E1ZE", "pan": "AAAAE0000E", "state": "Karnataka", "since": 2023, "score": 82, "tier": "B", "status": "Active", "reval": "2027-01-31", "po_count": 3, "po_value": "\u20b90.9 Cr", "compliance": 84, "delivery": 81, "quality": 80, "contact": "Vivek Kumar", "email": "apex.elec@works.in", "certifications": ["ISO 9001", "CPRI"], "blacklisted": false, "reval_status": "Valid"}];
 
-// Vendor Analytics - Chart.js Initialization
+Chart.defaults.font.family = "'DM Sans', sans-serif";
+Chart.defaults.color = '#6B7280';
+const PC = '#4338CA';
+
+// Vendor Analytics - Chart.js Initialization  
 function initializeVendorAnalyticsCharts() {
-  // Check if Chart library is available
   if (typeof Chart === 'undefined') {
     console.error('Chart.js not loaded');
     setTimeout(initializeVendorAnalyticsCharts, 100);
     return;
   }
 
-  const chartConfigs = [
-    { id: 'chart-spend-cat', elemId: 'chart-spend-cat' },
-    { id: 'chart-tier', elemId: 'chart-tier' },
-    { id: 'chart-monthly', elemId: 'chart-monthly' },
-    { id: 'chart-radar', elemId: 'chart-radar' },
-    { id: 'chart-risk-matrix', elemId: 'chart-risk-matrix' },
-    { id: 'chart-po-status', elemId: 'chart-po-status' },
-    { id: 'chart-po-trend', elemId: 'chart-po-trend' },
-    { id: 'chart-score-dist', elemId: 'chart-score-dist' },
-    { id: 'chart-yoy', elemId: 'chart-yoy' }
-  ];
-
-  const empanelChartConfigs = [
-    { id: 'emp-chart-spend-cat', elemId: 'emp-chart-spend-cat' },
-    { id: 'emp-chart-tier', elemId: 'emp-chart-tier' },
-    { id: 'emp-chart-monthly', elemId: 'emp-chart-monthly' },
-    { id: 'emp-chart-radar', elemId: 'emp-chart-radar' },
-    { id: 'emp-chart-risk-matrix', elemId: 'emp-chart-risk-matrix' },
-    { id: 'emp-chart-po-trend', elemId: 'emp-chart-po-trend' },
-    { id: 'emp-chart-score-dist', elemId: 'emp-chart-score-dist' },
-    { id: 'emp-chart-yoy', elemId: 'emp-chart-yoy' }
-  ];
-
-  const getChartConfig = (type, configName) => {
-    const configs = {
-      'bar-spend': {
-        type: 'bar',
-        data: {
-          labels: ['Road Haulage', 'Reach Stacker', 'Crane & Equip', 'Fire & Safety', 'IT Infrastructure'],
-          datasets: [{ label: '₹ Crore', data: [8.7, 32.1, 18.4, 3.2, 4.1], backgroundColor: ['#4338CA', '#6366F1', '#8B5CF6', '#A78BFA', '#C4B5FD'], borderRadius: 6, borderSkipped: false }]
-        },
-        options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true } } }
-      },
-      'doughnut-tier': {
-        type: 'doughnut',
-        data: { labels: ['Tier A', 'Tier B', 'Tier C'], datasets: [{ data: [55.6, 31.5, 6.3], backgroundColor: ['#4338CA', '#6366F1', '#C7D2FE'], borderColor: '#fff', borderWidth: 2 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } } }
-      },
-      'line-monthly': {
-        type: 'line',
-        data: { labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], datasets: [{ label: '₹ Lakh', data: [7200, 8500, 9000, 8100, 9600, 8600, 7800, 8200, 9100], borderColor: '#4338CA', backgroundColor: 'rgba(67, 56, 202, 0.05)', fill: true, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#4338CA', pointBorderColor: '#fff', pointBorderWidth: 2 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
-      },
-      'radar': {
-        type: 'radar',
-        data: { labels: ['Compliance', 'On-Time Delivery', 'Quality', 'Documentation', 'Communication'], datasets: [{ label: 'Liebherr India', data: [96, 94, 89, 92, 90], borderColor: '#16A34A', backgroundColor: 'rgba(22, 163, 74, 0.1)', pointBackgroundColor: '#16A34A' }, { label: 'Kalmar India', data: [92, 90, 87, 88, 85], borderColor: '#4338CA', backgroundColor: 'rgba(67, 56, 202, 0.1)', pointBackgroundColor: '#4338CA' }, { label: 'Rapid IT Solutions', data: [61, 65, 70, 60, 55], borderColor: '#DC2626', backgroundColor: 'rgba(220, 38, 38, 0.1)', pointBackgroundColor: '#DC2626' }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-      },
-      'scatter-risk': {
-        type: 'scatter',
-        data: { datasets: [{ label: 'Low Risk', data: [{x: 91, y: 94}, {x: 88, y: 90}, {x: 85, y: 84}], backgroundColor: '#16A34A', borderColor: '#16A34A' }, { label: 'Medium Risk', data: [{x: 82, y: 81}, {x: 79, y: 76}, {x: 77, y: 75}], backgroundColor: '#D97706', borderColor: '#D97706' }, { label: 'High Risk', data: [{x: 72, y: 68}, {x: 68, y: 65}], backgroundColor: '#DC2626', borderColor: '#DC2626' }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { x: { title: { display: true, text: 'Vendor Score' }, min: 60, max: 100 }, y: { title: { display: true, text: 'On-Time Delivery %' }, min: 60, max: 100 } } }
-      },
-      'doughnut-po': {
-        type: 'doughnut',
-        data: { labels: ['GRN Done', 'Active', 'Overdue'], datasets: [{ data: [4, 2, 2], backgroundColor: ['#16A34A', '#4338CA', '#DC2626'], borderColor: '#fff', borderWidth: 2 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-      },
-      'line-trend': {
-        type: 'line',
-        data: { labels: ['Q1 FY24', 'Q2 FY24', 'Q3 FY24', 'Q4 FY24', 'Q1 FY25', 'Q2 FY25', 'Q3 FY25', 'Q4 FY25', 'Q1 FY26'], datasets: [{ label: 'On-Time %', data: [85, 82, 78, 75, 73, 70, 72, 70, 72], borderColor: '#4338CA', backgroundColor: 'rgba(67, 56, 202, 0.05)', fill: true, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#4338CA' }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 60, max: 90 } } }
-      },
-      'bar-dist': {
-        type: 'bar',
-        data: { labels: ['≥ 85', '70-84', '< 70'], datasets: [{ label: 'Vendors', data: [3, 4, 1], backgroundColor: ['#16A34A', '#D97706', '#DC2626'], borderRadius: 4 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
-      },
-      'bar-yoy': {
-        type: 'bar',
-        data: { labels: ['On-Time Del', 'Compliance', 'Quality Score', 'Avg Vendor Score'], datasets: [{ label: 'FY24', data: [85, 88, 86, 80], backgroundColor: '#C7D2FE' }, { label: 'FY25', data: [78, 86, 84, 78], backgroundColor: '#6366F1' }, { label: 'FY26', data: [72, 86, 82, 82], backgroundColor: '#4338CA' }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } }, scales: { y: { beginAtZero: true, max: 100 } } }
-      }
-    };
-    return configs[configName];
-  };
-
-  // Map chart IDs to config types
-  const chartTypeMap = {
-    'chart-spend-cat': 'bar-spend', 'emp-chart-spend-cat': 'bar-spend',
-    'chart-tier': 'doughnut-tier', 'emp-chart-tier': 'doughnut-tier',
-    'chart-monthly': 'line-monthly', 'emp-chart-monthly': 'line-monthly',
-    'chart-radar': 'radar', 'emp-chart-radar': 'radar',
-    'chart-risk-matrix': 'scatter-risk', 'emp-chart-risk-matrix': 'scatter-risk',
-    'chart-po-status': 'doughnut-po',
-    'chart-po-trend': 'line-trend', 'emp-chart-po-trend': 'line-trend',
-    'chart-score-dist': 'bar-dist', 'emp-chart-score-dist': 'bar-dist',
-    'chart-yoy': 'bar-yoy', 'emp-chart-yoy': 'bar-yoy'
-  };
-
-  // Initialize analytics charts
   window.vendorCharts = window.vendorCharts || {};
-  chartConfigs.concat(empanelChartConfigs).forEach(config => {
-    const el = document.getElementById(config.elemId);
-    if (el && !window.vendorCharts[config.elemId]) {
-      try {
-        const chartType = chartTypeMap[config.elemId];
-        const chartCfg = getChartConfig(null, chartType);
-        const ctx = el.getContext('2d');
-        window.vendorCharts[config.elemId] = new Chart(ctx, chartCfg);
-        console.log('✓ Chart initialized:', config.elemId);
-      } catch (e) {
-        console.error('Chart init failed:', config.elemId, e);
+
+  // 1. Spend by Category
+  const spendEl = document.getElementById('chart-spend-cat');
+  if (spendEl && !window.vendorCharts['chart-spend-cat']) {
+    window.vendorCharts['chart-spend-cat'] = new Chart(spendEl, {
+      type:'bar',
+      data:{
+        labels:["Crane & Heavy Equip", "Road Haulage / FMLM", "RTG & Gantry", "Fire & Safety", "Reefer & Cold Chain", "IT Infrastructure", "Electrical", "Other"],
+        datasets:[{label:'Spend (Cr)',data:[18.4, 8.7, 24.0, 3.2, 1.8, 4.1, 0.9, 0.5],
+          backgroundColor:['#4338CA','#6366F1','#818CF8','#A5B4FC','#C7D2FE','#E0E7FF','#EEF2FF','#F5F3FF'],
+          borderRadius:6,borderSkipped:false}]
+      },
+      options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return '\u20B9'+c.raw+' Cr';}}}},
+        scales:{x:{grid:{display:false},ticks:{callback:function(v){return '\u20B9'+v+'Cr';}}},y:{grid:{color:'#F1F5F9'}}}}
+    });
+  }
+
+  // 2. Tier Donut
+  const tierEl = document.getElementById('chart-tier');
+  if (tierEl && !window.vendorCharts['chart-tier']) {
+    window.vendorCharts['chart-tier'] = new Chart(tierEl, {
+      type:'doughnut',
+      data:{labels:['Tier A','Tier B','Tier C'],datasets:[{data:[55.6,31.5,6.3],backgroundColor:['#4338CA','#6366F1','#C7D2FE'],borderWidth:0}]},
+      options:{cutout:'70%',plugins:{legend:{display:false},tooltip:{callbacks:{label:function(c){return '\u20B9'+c.raw+' Cr';}}}}}
+    });
+  }
+
+  // 3. Monthly Trend
+  const monthlyEl = document.getElementById('chart-monthly');
+  if (monthlyEl && !window.vendorCharts['chart-monthly']) {
+    window.vendorCharts['chart-monthly'] = new Chart(monthlyEl, {
+      type:'line',
+      data:{
+        labels:['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan','Feb','Mar'],
+        datasets:[
+          {label:'FY26',data:[320,280,190,150,210,380,290,340,420,510,460,650],backgroundColor:'#4338CA20',borderColor:'#4338CA',borderWidth:2,fill:true,tension:.4},
+          {label:'FY25',data:[280,240,170,140,190,310,260,290,380,440,390,580],backgroundColor:'#E2E8F020',borderColor:'#9CA3AF',borderWidth:1.5,tension:.4,borderDash:[4,4]}
+        ]
+      },
+      options:{plugins:{legend:{position:'top'}},scales:{y:{ticks:{callback:function(v){return '\u20B9'+v+'L';}}}}}
+    });
+  }
+
+  // 4. Vendor Radar
+  const radarEl = document.getElementById('chart-radar');
+  if (radarEl && !window.vendorCharts['chart-radar']) {
+    window.vendorCharts['chart-radar'] = new Chart(radarEl, {
+      type:'radar',
+      data:{
+        labels:['Compliance','On-Time Del','Quality','Documentation','Response'],
+        datasets:VENDORS.slice(0,4).map(function(v,i){
+          var c=['#4338CA','#6366F1','#D97706','#059669'][i];
+          return {label:v.name.split(' ')[0],data:[v.compliance,v.delivery,v.quality,v.compliance-3,v.delivery+2],
+            backgroundColor:c+'20',borderColor:c,borderWidth:2,pointBackgroundColor:c};
+        })
+      },
+      options:{plugins:{legend:{position:'right'}},scales:{r:{min:50,max:100,ticks:{stepSize:10}}}}
+    });
+  }
+
+  // 5. Risk Scatter
+  const riskEl = document.getElementById('chart-risk-matrix');
+  if (riskEl && !window.vendorCharts['chart-risk-matrix']) {
+    window.vendorCharts['chart-risk-matrix'] = new Chart(riskEl, {
+      type:'scatter',
+      data:{
+        datasets:[{label:'Vendors',
+          data:VENDORS.map(function(v){return {x:v.score,y:v.delivery};}),
+          backgroundColor:VENDORS.map(function(v){return v.score>=85?'rgba(22,163,74,.7)':v.score>=70?'rgba(217,119,6,.7)':'rgba(220,38,38,.7)';}),
+          pointRadius:10
+        }]
+      },
+      options:{
+        plugins:{tooltip:{callbacks:{label:function(c){var v=VENDORS[c.dataIndex];return v.name+': '+v.score+', Del:'+v.delivery+'%';}}}},
+        scales:{
+          x:{min:55,max:100,title:{display:true,text:'Overall Score'}},
+          y:{min:55,max:100,title:{display:true,text:'On-Time Delivery %'}}
+        }
       }
-    }
-  });
-  
-  // Store empanel charts reference
-  window.empanelCharts = Object.fromEntries(
-    empanelChartConfigs
-      .map(c => [c.elemId, window.vendorCharts[c.elemId]])
-      .filter(([_, chart]) => chart)
-  );
+    });
+  }
+
+  // 6. PO Status Donut
+  const poEl = document.getElementById('chart-po-status');
+  if (poEl && !window.vendorCharts['chart-po-status']) {
+    window.vendorCharts['chart-po-status'] = new Chart(poEl, {
+      type:'doughnut',
+      data:{labels:['GRN Done','Active','Overdue'],datasets:[{data:[4,2,2],backgroundColor:['#16A34A','#4338CA','#DC2626'],borderWidth:0}]},
+      options:{cutout:'65%',plugins:{legend:{display:false}}}
+    });
+  }
+
+  // 7. PO Fulfilment Trend
+  const trendEl = document.getElementById('chart-po-trend');
+  if (trendEl && !window.vendorCharts['chart-po-trend']) {
+    window.vendorCharts['chart-po-trend'] = new Chart(trendEl, {
+      type:'line',
+      data:{
+        labels:['Q1FY24','Q2FY24','Q3FY24','Q4FY24','Q1FY25','Q2FY25','Q3FY25','Q4FY25','Q1FY26','Q2FY26','Q3FY26'],
+        datasets:[{label:'On-Time GRN %',data:[82,78,85,80,76,79,74,78,72,75,80],borderColor:'#4338CA',backgroundColor:'#4338CA20',fill:true,tension:.4}]
+      },
+      options:{plugins:{legend:{display:false}},scales:{y:{min:60,max:100,ticks:{callback:function(v){return v+'%';}}}}}
+    });
+  }
+
+  // 8. Score Distribution
+  const distEl = document.getElementById('chart-score-dist');
+  if (distEl && !window.vendorCharts['chart-score-dist']) {
+    window.vendorCharts['chart-score-dist'] = new Chart(distEl, {
+      type:'bar',
+      data:{
+        labels:VENDORS.map(function(v){return v.name.split(' ')[0];}),
+        datasets:[{label:'Score',data:VENDORS.map(function(v){return v.score;}),
+          backgroundColor:VENDORS.map(function(v){return v.score>=85?'#16A34A':v.score>=70?'#D97706':'#DC2626';}),borderRadius:6}]
+      },
+      options:{plugins:{legend:{display:false}},scales:{y:{min:50,max:100}}}
+    });
+  }
+
+  // 9. YoY
+  const yoyEl = document.getElementById('chart-yoy');
+  if (yoyEl && !window.vendorCharts['chart-yoy']) {
+    window.vendorCharts['chart-yoy'] = new Chart(yoyEl, {
+      type:'bar',
+      data:{
+        labels:['Avg Score','On-Time Del%','Compliance%','Reval Comp%','Vendor Count'],
+        datasets:[
+          {label:'FY24',data:[76,78,84,95,6],backgroundColor:'#C7D2FE'},
+          {label:'FY25',data:[78,78,88,90,7],backgroundColor:'#818CF8'},
+          {label:'FY26',data:[82,72,86,62,8],backgroundColor:'#4338CA'}
+        ]
+      },
+      options:{plugins:{legend:{position:'top'}}}
+    });
+  }
 }
 
 // Initialize charts when analytics tab is opened
@@ -9135,14 +9161,15 @@ function analyticsSubTab(el, tabId) {
   const pane = document.getElementById(tabId);
   if (pane) {
     pane.classList.add('active');
-    // Trigger chart resize after tab transition
-    setTimeout(() => {
-      Object.values(window.vendorCharts).forEach(chart => {
+    // Trigger chart resize
+    requestAnimationFrame(() => {
+      Object.values(window.vendorCharts || {}).forEach(chart => {
         if (chart && typeof chart.resize === 'function') {
-          chart.resize();
+          try { chart.resize(); }
+          catch (e) { console.error('Chart resize error:', e); }
         }
       });
-    }, 150);
+    });
   }
 }
 
