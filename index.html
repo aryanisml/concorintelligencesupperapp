@@ -226,11 +226,11 @@ button{font-family:var(--font)}
 #login-screen.hidden{opacity:0;pointer-events:none}
 .login-bg{position:absolute;inset:0;background-size:cover;background-position:center}
 .login-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(11,23,42,.82) 0%,rgba(27,74,216,.55) 100%);backdrop-filter:blur(2px)}
-.login-card{position:relative;z-index:2;width:400px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:22px;padding:40px;backdrop-filter:blur(24px);box-shadow:0 32px 80px rgba(0,0,0,.4)}
-.login-input{width:100%;padding:13px 16px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:10px;color:#fff;font-size:14px;outline:none;font-family:var(--font);transition:.2s}
+.login-card{position:relative;z-index:2;width:400px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:22px;padding:28px;backdrop-filter:blur(24px);box-shadow:0 32px 80px rgba(0,0,0,.4)}
+.login-input{width:100%;padding:10px 14px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.25);border-radius:10px;color:#fff;font-size:14px;outline:none;font-family:var(--font);transition:.2s}
 .login-input::placeholder{color:rgba(255,255,255,.4)}
 .login-input:focus{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.15)}
-.login-btn{width:100%;padding:15px;background:linear-gradient(135deg,var(--navy),var(--blue2));color:#fff;border:none;border-radius:11px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:.2s;letter-spacing:-.01em}
+.login-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--navy),var(--blue2));color:#fff;border:none;border-radius:11px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:.2s;letter-spacing:-.01em}
 .login-btn:hover{opacity:.92}
 .login-lbl{font-size:11px;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px;font-weight:700}
 
@@ -573,7 +573,7 @@ button{font-family:var(--font)}
   </div>
   <div class="login-overlay"></div>
   <div class="login-card">
-    <div style="text-align:center;margin-bottom:28px">
+    <div style="text-align:center;margin-bottom:18px">
       <div style="width:54px;height:54px;background:linear-gradient(135deg,var(--navy),var(--blue2));border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;color:#fff;margin:0 auto 14px;box-shadow:0 8px 24px rgba(27,79,216,.4)">C</div>
       <div style="font-size:20px;font-weight:800;color:#fff;letter-spacing:-.02em">CONCOR Intelligence</div>
       <div style="font-size:11.5px;color:rgba(255,255,255,.45);margin-top:5px">Container Corporation of India Ltd.</div>
@@ -583,34 +583,34 @@ button{font-family:var(--font)}
       </div>
     </div>
     <div class="login-lbl" style="margin-bottom:5px">Login Type</div>
-    <select id="l-type" class="login-input" style="margin-bottom:14px;cursor:pointer;appearance:none;background-image:url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(255,255,255,.6)%22 stroke-width=%222%22%3e%3cpolyline points=%226 9 12 15 18 9%3e%3c/polyline%3e%3c/svg%3e');background-repeat:no-repeat;background-position:right 10px center;background-size:20px;padding-right:36px">
+    <select id="l-type" class="login-input" style="margin-bottom:10px;cursor:pointer;appearance:none;background-image:url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(255,255,255,.6)%22 stroke-width=%222%22%3e%3cpolyline points=%226 9 12 15 18 9%3e%3c/polyline%3e%3c/svg%3e');background-repeat:no-repeat;background-position:right 10px center;background-size:20px;padding-right:36px">
       <option value="internal" style="background:#1a1a2e;color:#fff">Internal / Employee</option>
       <option value="customer" style="background:#1a1a2e;color:#fff">Customer</option>
     </select>
     <div class="login-lbl" style="margin-bottom:5px">Username</div>
-    <input id="l-user" class="login-input" type="text" placeholder="e.g. admin" autocomplete="username" style="margin-bottom:14px"
+    <input id="l-user" class="login-input" type="text" placeholder="e.g. admin" autocomplete="username" style="margin-bottom:10px"
       onkeydown="if(event.key==='Enter')document.getElementById('l-pass').focus()">
     <div class="login-lbl" style="margin-bottom:5px">Password</div>
-    <input id="l-pass" class="login-input" type="password" placeholder="password" autocomplete="current-password" style="margin-bottom:20px"
+    <input id="l-pass" class="login-input" type="password" placeholder="password" autocomplete="current-password" style="margin-bottom:14px"
       onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Sign In →</button>
-    <div id="l-err" style="display:none;margin-top:12px;padding:10px 14px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#FCA5A5;font-size:12px;text-align:center">⚠ Invalid credentials — please try again</div>
-    <div style="margin-top:18px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:9px;border:1px solid rgba(255,255,255,.08)">
-      <div style="font-size:9.5px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px">Demo Credentials</div>
-      <div style="border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:8px;margin-bottom:8px">
-        <div style="font-size:8.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Internal / Employee</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
-          <div style="font-size:10px;color:rgba(255,255,255,.45)">admin / admin</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.45)">ops / ctkr2026</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.45)">hr / hr2026</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.45)">finance / fin2026</div>
+    <div id="l-err" style="display:none;margin-top:10px;padding:8px 12px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#FCA5A5;font-size:11px;text-align:center">⚠ Invalid credentials — please try again</div>
+    <div style="margin-top:12px;padding:10px 12px;background:rgba(255,255,255,.05);border-radius:9px;border:1px solid rgba(255,255,255,.08)">
+      <div style="font-size:9px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Demo Credentials</div>
+      <div style="border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:6px;margin-bottom:6px">
+        <div style="font-size:8px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Internal / Employee</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">
+          <div style="font-size:9px;color:rgba(255,255,255,.45)">admin / admin</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.45)">ops / ctkr2026</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.45)">hr / hr2026</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.45)">finance / fin2026</div>
         </div>
       </div>
       <div>
-        <div style="font-size:8.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Customer</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
-          <div style="font-size:10px;color:rgba(255,255,255,.45)">cust / cust</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.45)">customer / demo2026</div>
+        <div style="font-size:8px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Customer</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px">
+          <div style="font-size:9px;color:rgba(255,255,255,.45)">cust / cust</div>
+          <div style="font-size:9px;color:rgba(255,255,255,.45)">customer / demo2026</div>
         </div>
       </div>
     </div>
@@ -5205,22 +5205,20 @@ function renderLanding(){
   var html='';
   TILES.forEach(function(t){
     var can = (TILE_ACCESS[CU.role]||[]).indexOf(t.id)>=0;
+    // Skip rendering tiles that user doesn't have access to
+    if(!can) return;
     var label = t.label.replace('\n',' ');
     var descKey = 'tile_desc_'+t.id;
     var desc = localStorage_safe(descKey) || t.sub;
-    html += '<div onclick="'+(can?'navTo(\''+t.id+'\')':'')+'" class="land-tile'+(can?'':' locked')+'" id="ltile-'+t.id+'">';
+    html += '<div onclick="navTo(\''+t.id+'\')" class="land-tile" id="ltile-'+t.id+'">';
     html += '<div class="land-tile-accent" style="background:'+t.accent+'"></div>';
     html += '<div class="land-tile-body">';
     html += '<div class="land-tile-icon" style="background:'+t.bg+'">'+t.icon+'</div>';
     html += '<div class="land-tile-label">'+label+'</div>';
     html += '<div class="land-tile-sub">'+desc+'</div>';
-    if(can){
-      html += '<div class="land-tile-badge" style="color:'+t.color+'">LAUNCH →</div>';
-    } else {
-      html += '<div class="land-tile-badge" style="color:#9CA3AF">No access</div>';
-    }
+    html += '<div class="land-tile-badge" style="color:'+t.color+'">LAUNCH →</div>';
     html += '</div>';
-    if(can){ html += '<button class="land-tile-edit" onclick="event.stopPropagation();editTileDesc(\''+t.id+'\',\''+label+'\')" title="Edit description">✏️ Edit</button>'; }
+    html += '<button class="land-tile-edit" onclick="event.stopPropagation();editTileDesc(\''+t.id+'\',\''+label+'\')" title="Edit description">✏️ Edit</button>';
     html += '</div>';
   });
   g.innerHTML = html;
