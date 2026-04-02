@@ -582,6 +582,11 @@ button{font-family:var(--font)}
         <div style="font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.04em">SYSTEM ONLINE</div>
       </div>
     </div>
+    <div class="login-lbl" style="margin-bottom:5px">Login Type</div>
+    <select id="l-type" class="login-input" style="margin-bottom:14px;cursor:pointer;appearance:none;background-image:url('data:image/svg+xml;charset=UTF-8,%3csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22rgba(255,255,255,.6)%22 stroke-width=%222%22%3e%3cpolyline points=%226 9 12 15 18 9%3e%3c/polyline%3e%3c/svg%3e');background-repeat:no-repeat;background-position:right 10px center;background-size:20px;padding-right:36px">
+      <option value="internal" style="background:#1a1a2e;color:#fff">Internal / Employee</option>
+      <option value="customer" style="background:#1a1a2e;color:#fff">Customer</option>
+    </select>
     <div class="login-lbl" style="margin-bottom:5px">Username</div>
     <input id="l-user" class="login-input" type="text" placeholder="e.g. admin" autocomplete="username" style="margin-bottom:14px"
       onkeydown="if(event.key==='Enter')document.getElementById('l-pass').focus()">
@@ -592,12 +597,21 @@ button{font-family:var(--font)}
     <div id="l-err" style="display:none;margin-top:12px;padding:10px 14px;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#FCA5A5;font-size:12px;text-align:center">⚠ Invalid credentials — please try again</div>
     <div style="margin-top:18px;padding:10px 14px;background:rgba(255,255,255,.05);border-radius:9px;border:1px solid rgba(255,255,255,.08)">
       <div style="font-size:9.5px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px">Demo Credentials</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
-        <div style="font-size:10px;color:rgba(255,255,255,.45)">admin / admin</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.45)">ops / ctkr2026</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.45)">hr / hr2026</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.45)">customer / demo2026</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.45)">birla / cust2026</div>
+      <div style="border-bottom:1px solid rgba(255,255,255,.1);padding-bottom:8px;margin-bottom:8px">
+        <div style="font-size:8.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Internal / Employee</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+          <div style="font-size:10px;color:rgba(255,255,255,.45)">admin / admin</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.45)">ops / ctkr2026</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.45)">hr / hr2026</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.45)">finance / fin2026</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:8.5px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Customer</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+          <div style="font-size:10px;color:rgba(255,255,255,.45)">cust / cust</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.45)">customer / demo2026</div>
+        </div>
       </div>
     </div>
   </div>
@@ -5067,6 +5081,7 @@ const USERS = {
   'hr':       {p:'hr2026',   role:'hr',   name:'Anita Kapoor',    init:'AK', color:'#7C3AED'},
   'customer': {p:'demo2026', role:'cust', name:'Demo Customer',   init:'DC', color:'#0D9488'},
   'birla':    {p:'cust2026', role:'cust', name:'Birla Corpn Ltd', init:'BC', color:'#0D9488'},
+  'cust':     {p:'cust',     role:'cust', name:'Customer Portal', init:'CP', color:'#0D9488'},
   'finance':  {p:'fin2026',  role:'fin',  name:'CFO — Finance',   init:'CF', color:'#B45309'},
 };
 var CU = null;
@@ -5082,11 +5097,29 @@ const TILES = [
 ];
 
 function doLogin() {
+  var loginType = document.getElementById('l-type').value;
   var u = document.getElementById('l-user').value.trim().toLowerCase();
   var p = document.getElementById('l-pass').value.trim();
   var usr = USERS[u];
+  
+  // Validate login type and credentials
   if (usr && usr.p === p) {
-    CU = {name:usr.name, role:usr.role, init:usr.init, color:usr.color};
+    // For customer login, ensure role is 'cust'
+    if (loginType === 'customer' && usr.role !== 'cust') {
+      document.getElementById('l-err').style.display = 'block';
+      document.getElementById('l-err').textContent = '⚠ This account is for Internal/Employee access';
+      document.getElementById('l-pass').value = '';
+      return;
+    }
+    // For internal login, ensure role is not 'cust'
+    if (loginType === 'internal' && usr.role === 'cust') {
+      document.getElementById('l-err').style.display = 'block';
+      document.getElementById('l-err').textContent = '⚠ This account is for Customer access';
+      document.getElementById('l-pass').value = '';
+      return;
+    }
+    
+    CU = {name:usr.name, role:usr.role, init:usr.init, color:usr.color, loginType:loginType};
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('nav-av').textContent  = CU.init;
     document.getElementById('nav-av').style.background = CU.color;
@@ -5094,6 +5127,13 @@ function doLogin() {
     document.getElementById('nav-ur').textContent  = ROLES[CU.role]||'User';
     document.getElementById('nav-role').textContent = ROLES[CU.role]||'User';
     document.getElementById('nav-role').style.cssText = (ROLE_STYLE[CU.role]||'') + ';padding:3px 10px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase';
+    
+    // Update nav to show login type for customer
+    if (loginType === 'customer') {
+      var typeLabel = document.getElementById('nav-ur');
+      if (typeLabel) typeLabel.textContent = 'Customer Portal';
+    }
+    
     showPage('landing');
     renderLanding();
     restorePageSubs();
@@ -5101,6 +5141,7 @@ function doLogin() {
     agentInit();
   } else {
     document.getElementById('l-err').style.display = 'block';
+    document.getElementById('l-err').textContent = '⚠ Invalid credentials — please try again';
     document.getElementById('l-pass').value = '';
   }
 }
@@ -5109,7 +5150,9 @@ function doLogout() {
   document.getElementById('login-screen').classList.remove('hidden');
   document.getElementById('l-user').value = '';
   document.getElementById('l-pass').value = '';
+  document.getElementById('l-type').value = 'internal';
   document.getElementById('l-err').style.display = 'none';
+  document.getElementById('l-err').textContent = '⚠ Invalid credentials — please try again';
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
 }
 function showPage(id) {
